@@ -6,8 +6,8 @@ export function CheckForUpdate() {
   return window['go']['main']['App']['CheckForUpdate']();
 }
 
-export function CreateFolders(arg1, arg2, arg3) {
-  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3);
+export function CreateFolders(arg1, arg2, arg3, arg4) {
+  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4);
 }
 
 export function GetConfig() {

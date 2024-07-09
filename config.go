@@ -34,6 +34,7 @@ type Config struct {
 	WindowEffect         *int    `json:"windowEffect"`         // 0 = Auto, 1 = None, 2 = Mica, 3 = Acrylic, 4 = Tabbed
 	CheckForUpdates      *bool   `json:"checkForUpdates"`      // true, false
 	LastUpdateCheck      *int    `json:"lastUpdateCheck"`      // unix timestamp
+	FolderNamePattern    *string `json:"folderNamePattern"`    // string
 }
 
 func GetDefaultConfig() Config {
@@ -59,6 +60,7 @@ func GetDefaultConfig() Config {
 	defaultWindowEffect := 1
 	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
+	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada/Parsel}({Kurum})"
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -83,6 +85,7 @@ func GetDefaultConfig() Config {
 		WindowEffect:         &defaultWindowEffect,
 		CheckForUpdates:      &defaultCheckForUpdates,
 		LastUpdateCheck:      &defaultLastUpdateCheck,
+		FolderNamePattern:    &defaultFolderNamePattern,
 	}
 }
 

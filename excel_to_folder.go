@@ -60,7 +60,7 @@ func (a *App) GetTargetFolderDialog() string {
 	return path
 }
 
-func (a *App) CreateFolders(excelPath string, copyFolderPath string, targetPath string) {
+func (a *App) CreateFolders(excelPath string, copyFolderPath string, targetPath string, folderNamePattern string) {
 	excelFile, err := excelize.OpenFile(excelPath)
 
 	if err != nil {
@@ -79,33 +79,47 @@ func (a *App) CreateFolders(excelPath string, copyFolderPath string, targetPath 
 
 	var folderNames []string
 
+	var headers []string
+
 	for i, row := range rows {
 		if i == 0 {
-			continue
-		}
-		var folderNameElements []string
-
-		for j, colCell := range row {
-			if j == 0 {
+			for _, colCell := range row {
+				headers = append(headers, colCell)
 				continue
 			}
-			colCell = strings.TrimSpace(colCell)
 
-			words := strings.Split(colCell, " ")
-			for k, word := range words {
-				word = cases.Title(language.Turkish).String(word)
-				words[k] = word
-			}
-			colCell = strings.Join(words, "_")
-			colCell = strings.ReplaceAll(colCell, "/", "_")
-
-			folderNameElements = append(folderNameElements, colCell)
+			runtime.LogInfo(a.ctx, "Headers: "+strings.Join(headers, ", "))
 		}
 
-		// join except last element
-		folderName := strings.Join(folderNameElements[:len(folderNameElements)-1], "_")
-		// append last element
-		folderName = folderName + "(" + folderNameElements[len(folderNameElements)-1] + ")"
+		// folderNamePattern: {Dosya No}_{{Mahalle}}_{Ada/Parsel}({Kurum})
+
+		folderName := folderNamePattern
+		for k, header := range headers {
+			colCell := row[k]
+
+			// remove whitespace
+			colCell = strings.TrimSpace(colCell)
+
+			// replace slashes
+			colCell = strings.ReplaceAll(colCell, "/", "_")
+
+			// Replace placeholders in the pattern
+			placeholder := "{" + header + "}"
+			titlePlaceholder := "{{" + header + "}}"
+
+			// Title case conversion for specific placeholders
+			if strings.Contains(folderName, titlePlaceholder) {
+				words := strings.Split(colCell, " ")
+				for i, word := range words {
+					words[i] = cases.Title(language.Turkish).String(word)
+				}
+				colCell = strings.Join(words, "_")
+				folderName = strings.ReplaceAll(folderName, titlePlaceholder, colCell)
+			}
+
+			// Simple replacement
+			folderName = strings.ReplaceAll(folderName, placeholder, colCell)
+		}
 
 		folderName = strings.TrimSpace(folderName)
 

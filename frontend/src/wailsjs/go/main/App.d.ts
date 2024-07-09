@@ -4,7 +4,7 @@ import {main} from '../models';
 
 export function CheckForUpdate():Promise<main.UpdateInfo>;
 
-export function CreateFolders(arg1:string,arg2:string,arg3:string):Promise<void>;
+export function CreateFolders(arg1:string,arg2:string,arg3:string,arg4:string):Promise<void>;
 
 export function GetConfig():Promise<main.Config>;
 
