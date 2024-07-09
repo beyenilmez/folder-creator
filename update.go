@@ -156,7 +156,10 @@ func (app *App) Update(downloadUrl string) error {
 	}
 
 	runtime.LogInfo(app.ctx, "Update applied successfully. Restarting.")
-	app.SendNotification("settings.setting.update.update_applied", "settings.setting.update.restarting", "", "success")
+	app.SendNotification("Güncelleme başarıyla uygulandı.", "Yeniden başlatılıyor...", "", "success")
+
+	runtime.Show(app.ctx)
+	runtime.WindowShow(app.ctx)
 
 	// Restart the application
 	app.RestartApplication(false, []string{"--goto", "settings__update", "--notify", "settings.setting.update.update_successful", "", "", "success"})
