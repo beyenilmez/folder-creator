@@ -1,0 +1,19 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "folder-creator",
+  "outputfilename": "folder-creator",
+  "wailsjsdir": "./frontend/src",
+  "frontend:install": "yarn",
+  "frontend:build": "yarn build",
+  "frontend:dev:watcher": "yarn dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Bedirhan Yenilmez",
+    "email": "yenilmezbedirhan@gmail.com"
+  },
+  "info": {
+    "productName": "folder-creator",
+    "productVersion": "1.0.0",
+    "copyright": "Copyright © 2024 Bedirhan Yenilmez"
+  }
+}

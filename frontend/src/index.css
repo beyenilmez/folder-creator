@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: hsla(0, 0%, 100%, var(--opacity));
+    --foreground: hsl(222.2, 84%, 4.9%);
+
+    --muted: hsla(210, 40%, 96.1%, var(--opacity));
+    --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+
+    --popover: hsla(0, 0%, 100%, var(--opacity));
+    --popover-foreground: hsl(222.2, 84%, 4.9%);
+
+    --card: hsla(0, 0%, 100%, var(--opacity));
+    --card-foreground: hsl(222.2, 84%, 4.9%);
+
+    --border: hsla(214.3, 31.8%, 91.4%, var(--opacity));
+    --input: hsla(214.3, 31.8%, 91.4%, var(--opacity));
+
+    --primary: hsla(222.2, 47.4%, 11.2%, var(--opacity));
+    --primary-foreground: hsl(210, 40%, 98%);
+
+    --secondary: hsla(210, 40%, 96.1%, var(--opacity));
+    --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
+
+    --accent: hsla(210, 40%, 96.1%, var(--opacity));
+    --accent-foreground: hsl(222.2, 47.4%, 11.2%);
+
+    --destructive: hsla(0, 84.2%, 60.2%, var(--opacity));
+    --destructive-foreground: hsl(210, 40%, 98%);
+
+    --warning: rgba(158, 156, 0, var(--opacity));
+    --warning-foreground: hsl(210, 40%, 98%);
+
+    --ring: hsla(215, 20.2%, 65.1%, var(--opacity));
+
+    --radius: 0.5rem;
+
+    --opacity: 1;
+  }
+
+  .dark {
+    --background: hsla(222.2, 84%, 4.9%, var(--opacity));
+    --foreground: hsl(210, 40%, 98%);
+
+    --muted: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+    --muted-foreground: hsl(215, 20.2%, 65.1%);
+
+    --popover: hsla(222.2, 84%, 4.9%, var(--opacity));
+    --popover-foreground: hsl(210, 40%, 98%);
+
+    --card: hsla(222.2, 84%, 4.9%, var(--opacity));
+    --card-foreground: hsl(210, 40%, 98%);
+
+    --border: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+    --input: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+
+    --primary: hsla(210, 40%, 98%, var(--opacity));
+    --primary-foreground: hsl(222.2, 47.4%, 11.2%);
+
+    --secondary: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+    --secondary-foreground: hsl(210, 40%, 98%);
+
+    --accent: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+    --accent-foreground: hsl(210, 40%, 98%);
+
+    --destructive: hsla(0, 62.8%, 30.6%, var(--opacity));
+    --destructive-foreground: hsl(0, 85.7%, 97.3%);
+
+    --warning: rgba(219, 195, 0, var(--opacity));
+    --warning-foreground: hsl(0, 85.7%, 97.3%);
+
+    --ring: hsla(217.2, 32.6%, 17.5%, var(--opacity));
+  }
+}
+
+@layer base {
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .wails-drag {
+    --wails-draggable: drag;
+  }
+
+  .wails-nodrag {
+    --wails-draggable: no-drag;
+  }
+}
