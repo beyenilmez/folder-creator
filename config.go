@@ -47,7 +47,7 @@ func GetDefaultConfig() Config {
 	defaultEnableError := true
 	defaultEnableFatal := true
 	defaultMaxLogFiles := 20
-	defaultLanguage := "en-US"
+	defaultLanguage := "tr-TR"
 	defaultSaveWindowStatus := true
 	defaultWindowStartState := 0
 	defaultWindowStartPositionX := -100000
@@ -57,7 +57,7 @@ func GetDefaultConfig() Config {
 	defaultWindowScale := 100
 	defaultOpacity := 100
 	defaultWindowEffect := 1
-	defaultCheckForUpdates := false
+	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
 
 	return Config{
