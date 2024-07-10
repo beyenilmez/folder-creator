@@ -6,8 +6,8 @@ export function CheckForUpdate() {
   return window['go']['main']['App']['CheckForUpdate']();
 }
 
-export function CreateFolders(arg1, arg2, arg3) {
-  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3);
+export function CreateFolders(arg1, arg2, arg3, arg4, arg5, arg6) {
+  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
 export function GetConfig() {
@@ -38,8 +38,16 @@ export function GetVersion() {
   return window['go']['main']['App']['GetVersion']();
 }
 
+export function GetWordFileDialog() {
+  return window['go']['main']['App']['GetWordFileDialog']();
+}
+
 export function NeedsAdminPrivileges() {
   return window['go']['main']['App']['NeedsAdminPrivileges']();
+}
+
+export function OpenFile(arg1) {
+  return window['go']['main']['App']['OpenFile'](arg1);
 }
 
 export function OpenFileInExplorer(arg1) {

@@ -23,6 +23,8 @@ export namespace main {
 	    windowEffect?: number;
 	    checkForUpdates?: boolean;
 	    lastUpdateCheck?: number;
+	    folderNamePattern?: string;
+	    wordFileNamePattern?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -52,6 +54,8 @@ export namespace main {
 	        this.windowEffect = source["windowEffect"];
 	        this.checkForUpdates = source["checkForUpdates"];
 	        this.lastUpdateCheck = source["lastUpdateCheck"];
+	        this.folderNamePattern = source["folderNamePattern"];
+	        this.wordFileNamePattern = source["wordFileNamePattern"];
 	    }
 	}
 	export class UpdateInfo {

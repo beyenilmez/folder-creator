@@ -34,6 +34,8 @@ type Config struct {
 	WindowEffect         *int    `json:"windowEffect"`         // 0 = Auto, 1 = None, 2 = Mica, 3 = Acrylic, 4 = Tabbed
 	CheckForUpdates      *bool   `json:"checkForUpdates"`      // true, false
 	LastUpdateCheck      *int    `json:"lastUpdateCheck"`      // unix timestamp
+	FolderNamePattern    *string `json:"folderNamePattern"`    // string
+	WordFileNamePattern  *string `json:"wordFileNamePattern"`  // string
 }
 
 func GetDefaultConfig() Config {
@@ -47,7 +49,7 @@ func GetDefaultConfig() Config {
 	defaultEnableError := true
 	defaultEnableFatal := true
 	defaultMaxLogFiles := 20
-	defaultLanguage := "en-US"
+	defaultLanguage := "tr-TR"
 	defaultSaveWindowStatus := true
 	defaultWindowStartState := 0
 	defaultWindowStartPositionX := -100000
@@ -57,8 +59,10 @@ func GetDefaultConfig() Config {
 	defaultWindowScale := 100
 	defaultOpacity := 100
 	defaultWindowEffect := 1
-	defaultCheckForUpdates := false
+	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
+	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}"
+	defaultWordFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_rapor"
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -83,6 +87,8 @@ func GetDefaultConfig() Config {
 		WindowEffect:         &defaultWindowEffect,
 		CheckForUpdates:      &defaultCheckForUpdates,
 		LastUpdateCheck:      &defaultLastUpdateCheck,
+		FolderNamePattern:    &defaultFolderNamePattern,
+		WordFileNamePattern:  &defaultWordFileNamePattern,
 	}
 }
 
