@@ -62,9 +62,9 @@ func GetDefaultConfig() Config {
 	defaultWindowEffect := 1
 	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
-	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}"
-	defaultWordFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_rapor"
-	defaultFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_udf"
+	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})"
+	defaultWordFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Raporu-FEN"
+	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN.udf"
 
 	return Config{
 		Theme:                &defaultTheme,
