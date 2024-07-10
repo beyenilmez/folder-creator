@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -109,7 +110,6 @@ func generateFolderNames(folderNamePattern string, headers []string, rows [][]st
 	var folderNames []string
 	for _, row := range rows {
 		folderName := generatePatternName(folderNamePattern, headers, row)
-
 		folderNames = append(folderNames, strings.TrimSpace(folderName))
 	}
 	return folderNames
@@ -197,6 +197,8 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 				continue
 			}
 		}
+
+		runtime.WindowExecJS(appContext, `window.setExcelMessage("Klasörler oluşturuluyor: `+fmt.Sprintf("%d/%d", i+1, len(folderNames))+`");`)
 	}
 
 	a.SendNotification("Klasör oluşturma başarılı", "", strings.ReplaceAll(targetPath, "\\", "\\\\"), "success")
