@@ -24,6 +24,8 @@ export function GetWordFileDialog():Promise<string>;
 
 export function NeedsAdminPrivileges():Promise<boolean>;
 
+export function OpenFile(arg1:string):Promise<void>;
+
 export function OpenFileInExplorer(arg1:string):Promise<void>;
 
 export function ReadConfig(arg1:string):Promise<void>;

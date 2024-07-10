@@ -6,6 +6,8 @@ import {
   GetExcelFileDialog,
   GetTargetFolderDialog,
   GetWordFileDialog,
+  OpenFile,
+  OpenFileInExplorer,
   SendNotification,
 } from "@/wailsjs/go/main/App";
 import { Input } from "./ui/input";
@@ -74,6 +76,7 @@ export function Home() {
         })
         .finally(() => {
           setRunning(false);
+          setMessage("Klasörler başarıyla oluşturuldu");
         });
     } else {
       SendNotification(
@@ -101,25 +104,53 @@ export function Home() {
         <Button variant={"outline"} onClick={handleExcelFileDialog}>
           Excel Dosyası Seçin
         </Button>
-        <label>{excelPath ? excelPath : "Dosya seçilmedi..."}</label>
+        <Button
+          className="h-2"
+          disabled={!excelPath}
+          variant={"link"}
+          onClick={() => OpenFile(excelPath)}
+        >
+          {excelPath ? excelPath : "Dosya seçilmedi..."}
+        </Button>
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleWordFileDialog}>
           Word Dosyası Seçin
         </Button>
-        <label>{wordPath ? wordPath : "Dosya seçilmedi..."}</label>
+        <Button
+          className="h-2"
+          disabled={!wordPath}
+          variant={"link"}
+          onClick={() => OpenFile(wordPath)}
+        >
+          {wordPath ? wordPath : "Dosya seçilmedi..."}
+        </Button>{" "}
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleCopyFolder}>
           Klasör İçeriği Seçin
         </Button>
-        <label>{copyFolder ? copyFolder : "Klasör seçilmedi..."}</label>
+        <Button
+          className="h-2"
+          disabled={!copyFolder}
+          variant={"link"}
+          onClick={() => OpenFileInExplorer(copyFolder)}
+        >
+          {copyFolder ? copyFolder : "Klasör seçilmedi..."}
+        </Button>
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleTargetFolder}>
           Hedef Klasör Seçin
         </Button>
-        <label>{targetFolder ? targetFolder : "Klasör seçilmedi..."}</label>
+        <Button
+          className="h-2"
+          disabled={!targetFolder}
+          variant={"link"}
+          onClick={() => OpenFileInExplorer(targetFolder)}
+        >
+          {targetFolder ? targetFolder : "Klasör seçilmedi..."}
+        </Button>{" "}
       </div>
       <div className="flex items-center gap-0 w-full">
         <div className="flex flex-col items-center gap-2 w-full">
@@ -148,7 +179,7 @@ export function Home() {
       <div className="flex flex-col gap-2 text-center">
         <Button
           onClick={handleRun}
-          className="w-64"
+          className="mt-4 w-64"
           disabled={
             !excelPath || !targetFolder || !folderNamePattern || running
           }
@@ -156,7 +187,7 @@ export function Home() {
           {running ? (
             <LoaderCircle className="w-6 h-6 animate-spin" />
           ) : (
-            "Onayla"
+            "Klasörleri Oluştur"
           )}
         </Button>
       </div>

@@ -70,3 +70,14 @@ func (a *App) OpenFileInExplorer(path string) {
 	cmd := exec.Command(`explorer`, `/select,`, path)
 	cmd.Run()
 }
+
+func (a *App) OpenFile(path string) {
+	runtime.LogInfo(a.ctx, "Opening file: "+path)
+
+	cmd := exec.Command("rundll32.exe", "url.dll,FileProtocolHandler", path)
+	err := cmd.Run()
+
+	if err != nil {
+		runtime.LogWarning(a.ctx, err.Error())
+	}
+}

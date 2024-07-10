@@ -46,6 +46,10 @@ export function NeedsAdminPrivileges() {
   return window['go']['main']['App']['NeedsAdminPrivileges']();
 }
 
+export function OpenFile(arg1) {
+  return window['go']['main']['App']['OpenFile'](arg1);
+}
+
 export function OpenFileInExplorer(arg1) {
   return window['go']['main']['App']['OpenFileInExplorer'](arg1);
 }

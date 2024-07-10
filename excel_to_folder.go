@@ -198,7 +198,7 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 			}
 		}
 
-		runtime.WindowExecJS(appContext, `window.setExcelMessage("Klasörler oluşturuluyor: `+fmt.Sprintf("%d/%d", i+1, len(folderNames))+`");`)
+		runtime.WindowExecJS(appContext, `window.setExcelMessage("`+fmt.Sprintf("%d/%d", i+1, len(folderNames))+`");`)
 	}
 
 	a.SendNotification("Klasör oluşturma başarılı", "", strings.ReplaceAll(targetPath, "\\", "\\\\"), "success")
