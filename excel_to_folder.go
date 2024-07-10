@@ -54,6 +54,20 @@ func (a *App) GetWordFileDialog() string {
 	return path
 }
 
+func (a *App) GetFileDialog() string {
+	path, err := runtime.OpenFileDialog(a.ctx, runtime.OpenDialogOptions{
+		Title:                "Dosya seçin",
+		CanCreateDirectories: true,
+	})
+
+	if err != nil {
+		runtime.LogWarning(a.ctx, err.Error())
+		return ""
+	}
+
+	return path
+}
+
 func (a *App) GetCopyFolderDialog() string {
 	path, err := runtime.OpenDirectoryDialog(a.ctx, runtime.OpenDialogOptions{
 		Title:                "Kopyalanacak klasörü seçin",
@@ -145,9 +159,34 @@ func replacePlaceholdersWord(docx *docx.Docx, placeholder, replacement string) e
 	titlePlaceholder := "{{" + placeholder + "}}"
 	if strings.Contains(docx.GetContent(), titlePlaceholder) {
 		replacement = toTitleCaseWord(replacement)
-		return docx.Replace(titlePlaceholder, replacement, -1)
+		err1 := docx.Replace(titlePlaceholder, replacement, -1)
+		err2 := docx.ReplaceFooter("{"+placeholder+"}", replacement)
+		err3 := docx.ReplaceHeader("{"+placeholder+"}", replacement)
+
+		if err1 != nil {
+			return err1
+		}
+		if err2 != nil {
+			return err2
+		}
+		if err3 != nil {
+			return err3
+		}
 	}
-	return docx.Replace("{"+placeholder+"}", replacement, -1)
+	err1 := docx.Replace("{"+placeholder+"}", replacement, -1)
+	err2 := docx.ReplaceFooter("{"+placeholder+"}", replacement)
+	err3 := docx.ReplaceHeader("{"+placeholder+"}", replacement)
+
+	if err1 != nil {
+		return err1
+	}
+	if err2 != nil {
+		return err2
+	}
+	if err3 != nil {
+		return err3
+	}
+	return nil
 }
 
 func toTitleCaseFolder(text string) string {
@@ -166,8 +205,10 @@ func toTitleCaseWord(text string) string {
 	return strings.Join(words, " ")
 }
 
-func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, wordFileNamePattern string) string {
+func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, wordFileNamePattern string, fileNamePattern string, filePath string) string {
 	headers, rows, err := ReadExcelRows(excelPath)
+
+	runtime.LogDebug(a.ctx, "Headers: "+strings.Join(headers, ","))
 
 	if err != nil {
 		runtime.LogError(a.ctx, err.Error())
@@ -193,6 +234,15 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 
 		if wordPath != "" {
 			if err := createWordDocument(wordPath, wordFileNamePattern, headers, rows[i], targetFolderPath); err != nil {
+				runtime.LogError(a.ctx, err.Error())
+				continue
+			}
+		}
+
+		if fileNamePattern != "" {
+			fileName := generatePatternName(fileNamePattern, headers, rows[i])
+
+			if err := copyFile(filePath, filepath.Join(targetFolderPath, fileName)); err != nil {
 				runtime.LogError(a.ctx, err.Error())
 				continue
 			}
@@ -227,6 +277,13 @@ func createWordDocument(filePath string, wordFileNamePattern string, headers []s
 	fileName := generatePatternName(wordFileNamePattern, headers, row)
 
 	docx1.WriteToFile(filepath.Join(targetPath, fileName) + ".docx")
+
+	err = r.Close()
+
+	if err != nil {
+		runtime.LogError(appContext, err.Error())
+		return err
+	}
 
 	return nil
 }

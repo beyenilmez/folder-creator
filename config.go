@@ -36,6 +36,7 @@ type Config struct {
 	LastUpdateCheck      *int    `json:"lastUpdateCheck"`      // unix timestamp
 	FolderNamePattern    *string `json:"folderNamePattern"`    // string
 	WordFileNamePattern  *string `json:"wordFileNamePattern"`  // string
+	FileNamePattern      *string `json:"fileNamePattern"`      // string
 }
 
 func GetDefaultConfig() Config {
@@ -63,6 +64,7 @@ func GetDefaultConfig() Config {
 	defaultLastUpdateCheck := 0
 	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}"
 	defaultWordFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_rapor"
+	defaultFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_udf"
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -89,6 +91,7 @@ func GetDefaultConfig() Config {
 		LastUpdateCheck:      &defaultLastUpdateCheck,
 		FolderNamePattern:    &defaultFolderNamePattern,
 		WordFileNamePattern:  &defaultWordFileNamePattern,
+		FileNamePattern:      &defaultFileNamePattern,
 	}
 }
 

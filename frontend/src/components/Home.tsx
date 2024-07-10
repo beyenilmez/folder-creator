@@ -4,6 +4,7 @@ import {
   CreateFolders,
   GetCopyFolderDialog,
   GetExcelFileDialog,
+  GetFileDialog,
   GetTargetFolderDialog,
   GetWordFileDialog,
   OpenFile,
@@ -20,10 +21,12 @@ export function Home() {
 
   const [excelPath, setExcelPath] = useState<string>("");
   const [wordPath, setWordPath] = useState<string>("");
+  const [filePath, setFilePath] = useState<string>("");
   const [copyFolder, setCopyFolder] = useState<string>("");
   const [targetFolder, setTargetFolder] = useState<string>("");
   const [folderNamePattern, setFolderNamePattern] = useState<string>("");
   const [wordFileNamePattern, setWordFileNamePattern] = useState<string>("");
+  const [fileNamePattern, setFileNamePattern] = useState<string>("");
 
   const [running, setRunning] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -31,6 +34,7 @@ export function Home() {
   useEffect(() => {
     setFolderNamePattern(config?.folderNamePattern!);
     setWordFileNamePattern(config?.wordFileNamePattern!);
+    setFileNamePattern(config?.fileNamePattern!);
   }, [config]);
 
   const handleExcelFileDialog = () => {
@@ -42,6 +46,12 @@ export function Home() {
   const handleWordFileDialog = () => {
     GetWordFileDialog().then((path) => {
       setWordPath(path);
+    });
+  };
+
+  const handleFileDialog = () => {
+    GetFileDialog().then((path) => {
+      setFilePath(path);
     });
   };
 
@@ -67,7 +77,9 @@ export function Home() {
         copyFolder,
         targetFolder,
         folderNamePattern,
-        wordFileNamePattern
+        wordFileNamePattern,
+        fileNamePattern,
+        filePath
       )
         .then((error) => {
           if (error !== "") {
@@ -151,6 +163,33 @@ export function Home() {
           </Button>
         </div>
       </div>
+
+      <div className="flex flex-col items-center gap-2 w-full">
+        <Button variant={"outline"} onClick={handleFileDialog}>
+          Dosya Seçin
+        </Button>
+        <div className="flex h-4">
+          <Button
+            className="h-full"
+            disabled={!filePath}
+            variant={"link"}
+            onClick={() => OpenFile(filePath)}
+          >
+            {filePath ? filePath : "Dosya seçilmedi..."}
+          </Button>
+          <Button
+            variant={"destructive"}
+            className={`rounded-sm w-4 h-4 ${!filePath ? "hidden" : ""}`}
+            size={"icon"}
+            onClick={() => {
+              setFilePath("");
+            }}
+          >
+            <X className="p-0.5" />
+          </Button>
+        </div>
+      </div>
+
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleCopyFolder}>
           Klasör İçeriği Seçin
@@ -221,6 +260,17 @@ export function Home() {
             onChange={(e) => {
               setConfigField("wordFileNamePattern", e.target.value);
               setWordFileNamePattern(e.target.value);
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Dosya Adı</label>
+          <Input
+            className="w-[90%]"
+            value={fileNamePattern}
+            onChange={(e) => {
+              setConfigField("fileNamePattern", e.target.value);
+              setFileNamePattern(e.target.value);
             }}
           />
         </div>
