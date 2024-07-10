@@ -13,7 +13,7 @@ import {
 import { Input } from "./ui/input";
 import { useConfig } from "@/contexts/config-provider";
 import { LogDebug } from "@/wailsjs/runtime/runtime";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, X } from "lucide-react";
 
 export function Home() {
   const { config, setConfigField } = useConfig();
@@ -104,53 +104,102 @@ export function Home() {
         <Button variant={"outline"} onClick={handleExcelFileDialog}>
           Excel Dosyası Seçin
         </Button>
-        <Button
-          className="h-2"
-          disabled={!excelPath}
-          variant={"link"}
-          onClick={() => OpenFile(excelPath)}
-        >
-          {excelPath ? excelPath : "Dosya seçilmedi..."}
-        </Button>
+        <div className="flex h-4">
+          <Button
+            className="h-full"
+            disabled={!excelPath}
+            variant={"link"}
+            onClick={() => OpenFile(excelPath)}
+          >
+            {excelPath ? excelPath : "Dosya seçilmedi..."}
+          </Button>
+
+          <Button
+            variant={"destructive"}
+            className={`rounded-sm w-4 h-4 ${!excelPath ? "hidden" : ""}`}
+            size={"icon"}
+            onClick={() => {
+              setExcelPath("");
+            }}
+          >
+            <X className="p-0.5" />
+          </Button>
+        </div>
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleWordFileDialog}>
           Word Dosyası Seçin
         </Button>
-        <Button
-          className="h-2"
-          disabled={!wordPath}
-          variant={"link"}
-          onClick={() => OpenFile(wordPath)}
-        >
-          {wordPath ? wordPath : "Dosya seçilmedi..."}
-        </Button>{" "}
+        <div className="flex h-4">
+          <Button
+            className="h-full"
+            disabled={!wordPath}
+            variant={"link"}
+            onClick={() => OpenFile(wordPath)}
+          >
+            {wordPath ? wordPath : "Dosya seçilmedi..."}
+          </Button>
+          <Button
+            variant={"destructive"}
+            className={`rounded-sm w-4 h-4 ${!wordPath ? "hidden" : ""}`}
+            size={"icon"}
+            onClick={() => {
+              setWordPath("");
+            }}
+          >
+            <X className="p-0.5" />
+          </Button>
+        </div>
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleCopyFolder}>
           Klasör İçeriği Seçin
         </Button>
-        <Button
-          className="h-2"
-          disabled={!copyFolder}
-          variant={"link"}
-          onClick={() => OpenFileInExplorer(copyFolder)}
-        >
-          {copyFolder ? copyFolder : "Klasör seçilmedi..."}
-        </Button>
+        <div className="flex h-4">
+          <Button
+            className="h-full"
+            disabled={!copyFolder}
+            variant={"link"}
+            onClick={() => OpenFileInExplorer(copyFolder)}
+          >
+            {copyFolder ? copyFolder : "Klasör seçilmedi..."}
+          </Button>
+          <Button
+            variant={"destructive"}
+            className={`rounded-sm w-4 h-4 ${!copyFolder ? "hidden" : ""}`}
+            size={"icon"}
+            onClick={() => {
+              setCopyFolder("");
+            }}
+          >
+            <X className="p-0.5" />
+          </Button>
+        </div>
       </div>
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleTargetFolder}>
           Hedef Klasör Seçin
         </Button>
-        <Button
-          className="h-2"
-          disabled={!targetFolder}
-          variant={"link"}
-          onClick={() => OpenFileInExplorer(targetFolder)}
-        >
-          {targetFolder ? targetFolder : "Klasör seçilmedi..."}
-        </Button>{" "}
+        <div className="flex h-4">
+          <Button
+            className="h-full"
+            disabled={!targetFolder}
+            variant={"link"}
+            onClick={() => OpenFileInExplorer(targetFolder)}
+          >
+            {targetFolder ? targetFolder : "Klasör seçilmedi..."}
+          </Button>
+          <Button
+            variant={"destructive"}
+            className={`rounded-sm w-4 h-4 ${!targetFolder ? "hidden" : ""}`}
+            size={"icon"}
+            onClick={() => {
+              setTargetFolder("");
+            }}
+          >
+            <X className="p-0.5" />
+          </Button>
+        </div>
       </div>
       <div className="flex items-center gap-0 w-full">
         <div className="flex flex-col items-center gap-2 w-full">
