@@ -61,8 +61,8 @@ func GetDefaultConfig() Config {
 	defaultWindowEffect := 1
 	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
-	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada/Parsel}({Kurum})"
-	defaultWordFileNamePattern := "Rapor_{Dosya No}"
+	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}"
+	defaultWordFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_rapor"
 
 	return Config{
 		Theme:                &defaultTheme,
