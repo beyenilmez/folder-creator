@@ -4,7 +4,7 @@ import {main} from '../models';
 
 export function CheckForUpdate():Promise<main.UpdateInfo>;
 
-export function CreateFolders(arg1:string,arg2:string,arg3:string,arg4:string):Promise<void>;
+export function CreateFolders(arg1:string,arg2:string,arg3:string,arg4:string,arg5:string,arg6:string):Promise<string>;
 
 export function GetConfig():Promise<main.Config>;
 
@@ -19,6 +19,8 @@ export function GetLoadConfigPath():Promise<string>;
 export function GetTargetFolderDialog():Promise<string>;
 
 export function GetVersion():Promise<string>;
+
+export function GetWordFileDialog():Promise<string>;
 
 export function NeedsAdminPrivileges():Promise<boolean>;
 

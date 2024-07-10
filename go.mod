@@ -8,6 +8,7 @@ require (
 	github.com/gen2brain/beeep v0.0.0-20240516210008-9c006672e7f4
 	github.com/jeandeaual/go-locale v0.0.0-20240223122105-ce5225dcaa49
 	github.com/minio/selfupdate v0.6.0
+	github.com/nguyenthenguyen/docx v0.0.0-20230621112118-9c8e795a11db
 	github.com/wailsapp/wails/v2 v2.9.1
 	github.com/xuri/excelize/v2 v2.8.1
 )

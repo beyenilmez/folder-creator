@@ -24,6 +24,7 @@ export namespace main {
 	    checkForUpdates?: boolean;
 	    lastUpdateCheck?: number;
 	    folderNamePattern?: string;
+	    wordFileNamePattern?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -54,6 +55,7 @@ export namespace main {
 	        this.checkForUpdates = source["checkForUpdates"];
 	        this.lastUpdateCheck = source["lastUpdateCheck"];
 	        this.folderNamePattern = source["folderNamePattern"];
+	        this.wordFileNamePattern = source["wordFileNamePattern"];
 	    }
 	}
 	export class UpdateInfo {

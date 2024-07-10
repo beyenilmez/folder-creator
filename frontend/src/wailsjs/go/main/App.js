@@ -6,8 +6,8 @@ export function CheckForUpdate() {
   return window['go']['main']['App']['CheckForUpdate']();
 }
 
-export function CreateFolders(arg1, arg2, arg3, arg4) {
-  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4);
+export function CreateFolders(arg1, arg2, arg3, arg4, arg5, arg6) {
+  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
 export function GetConfig() {
@@ -36,6 +36,10 @@ export function GetTargetFolderDialog() {
 
 export function GetVersion() {
   return window['go']['main']['App']['GetVersion']();
+}
+
+export function GetWordFileDialog() {
+  return window['go']['main']['App']['GetWordFileDialog']();
 }
 
 export function NeedsAdminPrivileges() {
