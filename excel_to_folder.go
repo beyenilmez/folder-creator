@@ -221,6 +221,9 @@ func createWordDocument(filePath string, wordFileNamePattern string, headers []s
 		replacePlaceholdersWord(docx1, header, colCell)
 	}
 
+	// Strip the file extension
+	wordFileNamePattern = strings.TrimSuffix(wordFileNamePattern, filepath.Ext(wordFileNamePattern))
+
 	fileName := generatePatternName(wordFileNamePattern, headers, row)
 
 	docx1.WriteToFile(filepath.Join(targetPath, fileName) + ".docx")
