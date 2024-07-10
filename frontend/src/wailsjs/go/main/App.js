@@ -6,8 +6,8 @@ export function CheckForUpdate() {
   return window['go']['main']['App']['CheckForUpdate']();
 }
 
-export function CreateFolders(arg1, arg2, arg3, arg4, arg5, arg6) {
-  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4, arg5, arg6);
+export function CreateFolders(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
+  return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 }
 
 export function GetConfig() {
@@ -24,6 +24,10 @@ export function GetCopyFolderDialog() {
 
 export function GetExcelFileDialog() {
   return window['go']['main']['App']['GetExcelFileDialog']();
+}
+
+export function GetFileDialog() {
+  return window['go']['main']['App']['GetFileDialog']();
 }
 
 export function GetLoadConfigPath() {

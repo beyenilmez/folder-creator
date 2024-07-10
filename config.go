@@ -36,6 +36,7 @@ type Config struct {
 	LastUpdateCheck      *int    `json:"lastUpdateCheck"`      // unix timestamp
 	FolderNamePattern    *string `json:"folderNamePattern"`    // string
 	WordFileNamePattern  *string `json:"wordFileNamePattern"`  // string
+	FileNamePattern      *string `json:"fileNamePattern"`      // string
 }
 
 func GetDefaultConfig() Config {
@@ -61,8 +62,9 @@ func GetDefaultConfig() Config {
 	defaultWindowEffect := 1
 	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
-	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}"
-	defaultWordFileNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}_rapor"
+	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})"
+	defaultWordFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Raporu-FEN"
+	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN.udf"
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -89,6 +91,7 @@ func GetDefaultConfig() Config {
 		LastUpdateCheck:      &defaultLastUpdateCheck,
 		FolderNamePattern:    &defaultFolderNamePattern,
 		WordFileNamePattern:  &defaultWordFileNamePattern,
+		FileNamePattern:      &defaultFileNamePattern,
 	}
 }
 
