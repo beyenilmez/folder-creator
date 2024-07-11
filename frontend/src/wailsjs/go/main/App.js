@@ -10,6 +10,10 @@ export function CreateFolders(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
   return window['go']['main']['App']['CreateFolders'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 }
 
+export function CreateFoldersV2(arg1, arg2, arg3) {
+  return window['go']['main']['App']['CreateFoldersV2'](arg1, arg2, arg3);
+}
+
 export function GetConfig() {
   return window['go']['main']['App']['GetConfig']();
 }

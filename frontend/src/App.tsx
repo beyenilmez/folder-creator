@@ -12,12 +12,13 @@ import React from "react";
 import { useConfig } from "./contexts/config-provider";
 import { LogDebug } from "@/wailsjs/runtime/runtime";
 import { Home } from "./components/Home";
+import { HomeV2 } from "./components/HomeV2";
 
 function App() {
   const { config, initialConfig } = useConfig();
   const { t } = useTranslation();
   const { setValue } = useStorage();
-  const [tab, setTab] = useState("packs");
+  const [tab, setTab] = useState("homev2");
 
   useLayoutEffect(() => {
     if (
@@ -104,6 +105,9 @@ function App() {
               <TabsTrigger value="packs" onClick={() => setTab("packs")}>
                 {t("nav.my_packs")}
               </TabsTrigger>
+              <TabsTrigger value="homev2" onClick={() => setTab("homev2")}>
+                Klasör Oluşturucu v2
+              </TabsTrigger>
               <TabsTrigger value="settings" onClick={() => setTab("settings")}>
                 {t("nav.settings")}
               </TabsTrigger>
@@ -112,7 +116,10 @@ function App() {
           </TabsList>
 
           <TabsContent value="packs" className="w-ful h-full">
-          <Home/>
+            <Home />
+          </TabsContent>
+          <TabsContent value="homev2" className="w-ful h-full">
+            <HomeV2 />
           </TabsContent>
           <TabsContent value="settings" className="w-ful h-full">
             <Settings />

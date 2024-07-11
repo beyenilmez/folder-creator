@@ -6,6 +6,8 @@ export function CheckForUpdate():Promise<main.UpdateInfo>;
 
 export function CreateFolders(arg1:string,arg2:string,arg3:string,arg4:string,arg5:string,arg6:string,arg7:string,arg8:string):Promise<string>;
 
+export function CreateFoldersV2(arg1:string,arg2:string,arg3:string):Promise<string>;
+
 export function GetConfig():Promise<main.Config>;
 
 export function GetConfigField(arg1:string):Promise<any>;
