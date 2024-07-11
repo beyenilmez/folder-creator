@@ -256,6 +256,41 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 	return ""
 }
 
+func (a *App) CreateFoldersV2(excelPath string, copyFolderPath string, targetPath string) string {
+	headers, rows, err := ReadExcelRows(excelPath)
+
+	runtime.LogDebug(a.ctx, "Headers: "+strings.Join(headers, ","))
+
+	if err != nil {
+		runtime.LogError(a.ctx, err.Error())
+		return err.Error()
+	}
+
+	folderNamePattern := filepath.Base(copyFolderPath)
+	folderNames := generateFolderNames(folderNamePattern, headers, rows)
+
+	for i, folderName := range folderNames {
+		targetFolderPath := filepath.Join(targetPath, folderName)
+
+		if err := createFolder(targetFolderPath); err != nil {
+			runtime.LogError(a.ctx, "Failed to create folder: "+err.Error())
+			continue
+		}
+
+		if copyFolderPath != "" {
+			if err := copyFolderContentsV2(copyFolderPath, targetFolderPath, headers, rows[i]); err != nil {
+				runtime.LogError(a.ctx, err.Error())
+				continue
+			}
+		}
+		runtime.WindowExecJS(appContext, `window.setExcelMessage("`+fmt.Sprintf("%d/%d", i+1, len(folderNames))+`");`)
+	}
+
+	a.SendNotification("Klasör oluşturma başarılı", "", strings.ReplaceAll(targetPath, "\\", "\\\\"), "success")
+
+	return ""
+}
+
 func createWordDocument(filePath string, wordFileNamePattern string, headers []string, row []string, targetPath string) error {
 	r, err := docx.ReadDocxFile(filePath)
 
@@ -324,6 +359,30 @@ func copyFolderContents(src, dest string) error {
 		if err != nil {
 			return err
 		}
+		targetPath := filepath.Join(dest, relativePath)
+		if info.IsDir() {
+			return os.MkdirAll(targetPath, info.Mode())
+		}
+		return copyFile(path, targetPath)
+	})
+}
+
+func copyFolderContentsV2(src, dest string, headers []string, row []string) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		relativePath, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
+
+		if filepath.Ext(relativePath) == ".docx" {
+			return createWordDocument(path, filepath.Base(path), headers, row, dest)
+		}
+
+		relativePath = generatePatternName(relativePath, headers, row)
+
 		targetPath := filepath.Join(dest, relativePath)
 		if info.IsDir() {
 			return os.MkdirAll(targetPath, info.Mode())
