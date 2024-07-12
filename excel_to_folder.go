@@ -112,6 +112,22 @@ func ReadExcelRows(excelPath string) ([]string, [][]string, error) {
 	return rows[0], rows[1:], nil
 }
 
+func ReadExcel(excelPath string) ([]string, [][]string, *excelize.File, error) {
+	excelFile, err := excelize.OpenFile(excelPath)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	sheetName := excelFile.GetSheetList()[0]
+
+	// Get all the rows in the Sheet1.
+	rows, err := excelFile.GetRows(sheetName)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+
+	return rows[0], rows[1:], excelFile, nil
+}
+
 func generatePatternName(pattern string, headers []string, row []string) string {
 	for i, header := range headers {
 		colCell := sanitizeCellFolder(row[i])

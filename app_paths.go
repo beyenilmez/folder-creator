@@ -8,6 +8,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
+var appFolder string
 var logsFolder string
 var savedConfigFolder string
 var configPath string
@@ -23,7 +24,7 @@ func path_init() error {
 	}
 	runtime.LogDebug(appContext, "Found user config directory: "+appData)
 
-	appFolder := path.Join(appData, "folder-creator")
+	appFolder = path.Join(appData, "folder-creator")
 	logsFolder = path.Join(appFolder, "logs")
 	savedConfigFolder = path.Join(appFolder, "savedconfigs")
 

@@ -26,6 +26,14 @@ export namespace main {
 	    folderNamePattern?: string;
 	    wordFileNamePattern?: string;
 	    fileNamePattern?: string;
+	    ilCellName?: string;
+	    ilceCellName?: string;
+	    mahalleCellName?: string;
+	    adaCellName?: string;
+	    parselCellName?: string;
+	    alanCellName?: string;
+	    paftaCellName?: string;
+	    parselSorguHeadless?: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -58,6 +66,62 @@ export namespace main {
 	        this.folderNamePattern = source["folderNamePattern"];
 	        this.wordFileNamePattern = source["wordFileNamePattern"];
 	        this.fileNamePattern = source["fileNamePattern"];
+	        this.ilCellName = source["ilCellName"];
+	        this.ilceCellName = source["ilceCellName"];
+	        this.mahalleCellName = source["mahalleCellName"];
+	        this.adaCellName = source["adaCellName"];
+	        this.parselCellName = source["parselCellName"];
+	        this.alanCellName = source["alanCellName"];
+	        this.paftaCellName = source["paftaCellName"];
+	        this.parselSorguHeadless = source["parselSorguHeadless"];
+	    }
+	}
+	export class Properties {
+	    ParselNo: string;
+	    Alan: string;
+	    Mevkii: string;
+	    Nitelik: string;
+	    Ada: string;
+	    Il: string;
+	    Ilce: string;
+	    Pafta: string;
+	    Mahalle: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Properties(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.ParselNo = source["ParselNo"];
+	        this.Alan = source["Alan"];
+	        this.Mevkii = source["Mevkii"];
+	        this.Nitelik = source["Nitelik"];
+	        this.Ada = source["Ada"];
+	        this.Il = source["Il"];
+	        this.Ilce = source["Ilce"];
+	        this.Pafta = source["Pafta"];
+	        this.Mahalle = source["Mahalle"];
+	    }
+	}
+	export class QueryParams {
+	    province: string;
+	    district: string;
+	    neighborhood: string;
+	    block: string;
+	    parcel: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new QueryParams(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.province = source["province"];
+	        this.district = source["district"];
+	        this.neighborhood = source["neighborhood"];
+	        this.block = source["block"];
+	        this.parcel = source["parcel"];
 	    }
 	}
 	export class UpdateInfo {
