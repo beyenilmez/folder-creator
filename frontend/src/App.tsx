@@ -13,6 +13,7 @@ import { useConfig } from "./contexts/config-provider";
 import { LogDebug } from "@/wailsjs/runtime/runtime";
 import { Home } from "./components/Home";
 import { HomeV2 } from "./components/HomeV2";
+import { ParselSorguComp } from "./components/ParselSorgu";
 
 function App() {
   const { config, initialConfig } = useConfig();
@@ -108,6 +109,12 @@ function App() {
               <TabsTrigger value="homev2" onClick={() => setTab("homev2")}>
                 Klasör Oluşturucu v2
               </TabsTrigger>
+              <TabsTrigger
+                value="parselsorgu"
+                onClick={() => setTab("parselsorgu")}
+              >
+                Parsel Sorgu
+              </TabsTrigger>
               <TabsTrigger value="settings" onClick={() => setTab("settings")}>
                 {t("nav.settings")}
               </TabsTrigger>
@@ -120,6 +127,9 @@ function App() {
           </TabsContent>
           <TabsContent value="homev2" className="w-ful h-full">
             <HomeV2 />
+          </TabsContent>
+          <TabsContent value="parselsorgu" className="w-ful h-full">
+            <ParselSorguComp />
           </TabsContent>
           <TabsContent value="settings" className="w-ful h-full">
             <Settings />
