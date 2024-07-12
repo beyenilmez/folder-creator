@@ -37,6 +37,14 @@ type Config struct {
 	FolderNamePattern    *string `json:"folderNamePattern"`    // string
 	WordFileNamePattern  *string `json:"wordFileNamePattern"`  // string
 	FileNamePattern      *string `json:"fileNamePattern"`      // string
+	IlCellName           *string `json:"ilCellName"`           // string
+	IlceCellName         *string `json:"ilceCellName"`         // string
+	MahalleCellName      *string `json:"mahalleCellName"`      // string
+	AdaCellName          *string `json:"adaCellName"`          // string
+	ParselCellName       *string `json:"parselCellName"`       // string
+	AlanCellName         *string `json:"alanCellName"`         // string
+	PaftaCellName        *string `json:"paftaCellName"`        // string
+	ParselSorguHeadless  *bool   `json:"parselSorguHeadless"`  // true, false
 }
 
 func GetDefaultConfig() Config {
@@ -65,6 +73,14 @@ func GetDefaultConfig() Config {
 	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})"
 	defaultWordFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Raporu-FEN"
 	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN.udf"
+	defaultIlCellName := "Konya"
+	defaultIlceCellName := "Ilcesi"
+	defaultMahalleCellName := "Mahalle"
+	defaultAdaCellName := "Ada"
+	defaultParselCellName := "Parsel"
+	defaultAlanCellName := "Alan (m2)"
+	defaultPaftaCellName := "Pafta"
+	defaultParselSorguHeadless := true
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -92,6 +108,14 @@ func GetDefaultConfig() Config {
 		FolderNamePattern:    &defaultFolderNamePattern,
 		WordFileNamePattern:  &defaultWordFileNamePattern,
 		FileNamePattern:      &defaultFileNamePattern,
+		IlCellName:           &defaultIlCellName,
+		IlceCellName:         &defaultIlceCellName,
+		MahalleCellName:      &defaultMahalleCellName,
+		AdaCellName:          &defaultAdaCellName,
+		ParselCellName:       &defaultParselCellName,
+		AlanCellName:         &defaultAlanCellName,
+		PaftaCellName:        &defaultPaftaCellName,
+		ParselSorguHeadless:  &defaultParselSorguHeadless,
 	}
 }
 
