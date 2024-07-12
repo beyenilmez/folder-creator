@@ -74,7 +74,7 @@ func GetDefaultConfig() Config {
 	defaultWordFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Raporu-FEN"
 	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN.udf"
 	defaultIlCellName := "Konya"
-	defaultIlceCellName := "Ilcesi"
+	defaultIlceCellName := "İlçesi"
 	defaultMahalleCellName := "Mahalle"
 	defaultAdaCellName := "Ada"
 	defaultParselCellName := "Parsel"

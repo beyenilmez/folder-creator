@@ -425,6 +425,8 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 	runtime.LogInfo(app.ctx, "Headers: "+fmt.Sprint(headers))
 
 	for i, header := range headers {
+		header = strings.TrimSpace(header)
+
 		if header == ilHeader {
 			ilIndex = i
 			runtime.LogInfo(app.ctx, "Matched ilHeader: "+header)
@@ -472,11 +474,6 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 	if parselIndex == -1 && parselHeader != "" {
 		runtime.LogInfo(app.ctx, "Setting all parsel headers to: "+parselHeader)
 		parsel = parselHeader
-	}
-
-	if alanIndex == -1 || paftaIndex == -1 {
-		runtime.LogError(app.ctx, "Failed to find required headers: "+fmt.Sprint(ilIndex, ilceIndex, mahalleIndex, adaIndex, parselIndex, alanIndex, paftaIndex))
-		return fmt.Errorf("failed to find required headers")
 	}
 
 	for i := 0; i < len(rows); i++ {
