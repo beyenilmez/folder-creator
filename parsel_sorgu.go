@@ -425,6 +425,8 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 	runtime.LogInfo(app.ctx, "Headers: "+fmt.Sprint(headers))
 
 	for i, header := range headers {
+		header = strings.TrimSpace(header)
+
 		if header == ilHeader {
 			ilIndex = i
 			runtime.LogInfo(app.ctx, "Matched ilHeader: "+header)
