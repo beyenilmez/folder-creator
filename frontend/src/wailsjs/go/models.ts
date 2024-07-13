@@ -39,6 +39,8 @@ export namespace main {
 	    tapuNamePattern?: string;
 	    mevkiCellName?: string;
 	    alanCellNameTapu?: string;
+	    excelHeaderMatchPattern?: string;
+	    excelCellModifyPattern?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -84,6 +86,8 @@ export namespace main {
 	        this.tapuNamePattern = source["tapuNamePattern"];
 	        this.mevkiCellName = source["mevkiCellName"];
 	        this.alanCellNameTapu = source["alanCellNameTapu"];
+	        this.excelHeaderMatchPattern = source["excelHeaderMatchPattern"];
+	        this.excelCellModifyPattern = source["excelCellModifyPattern"];
 	    }
 	}
 	export class Properties {

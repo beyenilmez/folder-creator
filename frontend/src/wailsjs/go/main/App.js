@@ -38,6 +38,10 @@ export function GetExcelFileDialog() {
   return window['go']['main']['App']['GetExcelFileDialog']();
 }
 
+export function GetExcelFilesDialog() {
+  return window['go']['main']['App']['GetExcelFilesDialog']();
+}
+
 export function GetFileDialog() {
   return window['go']['main']['App']['GetFileDialog']();
 }
@@ -60,6 +64,10 @@ export function GetWordFileDialog() {
 
 export function InitParselSorgu(arg1) {
   return window['go']['main']['App']['InitParselSorgu'](arg1);
+}
+
+export function ModifyExcelWithTakbis(arg1, arg2, arg3, arg4) {
+  return window['go']['main']['App']['ModifyExcelWithTakbis'](arg1, arg2, arg3, arg4);
 }
 
 export function NeedsAdminPrivileges() {

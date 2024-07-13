@@ -6,6 +6,7 @@ declare global {
     setParselMessage: (message: string) => void;
     setExcelProgress: (progress: number) => void;
     setCiltMessage: (message: string) => void;
+    setTakbisMessage: (message: string) => void;
   }
 }
 

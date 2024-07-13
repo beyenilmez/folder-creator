@@ -20,6 +20,8 @@ export function GetCopyFolderDialog():Promise<string>;
 
 export function GetExcelFileDialog():Promise<string>;
 
+export function GetExcelFilesDialog():Promise<Array<string>>;
+
 export function GetFileDialog():Promise<string>;
 
 export function GetLoadConfigPath():Promise<string>;
@@ -31,6 +33,8 @@ export function GetVersion():Promise<string>;
 export function GetWordFileDialog():Promise<string>;
 
 export function InitParselSorgu(arg1:boolean):Promise<void>;
+
+export function ModifyExcelWithTakbis(arg1:string,arg2:Array<string>,arg3:string,arg4:string):Promise<string>;
 
 export function NeedsAdminPrivileges():Promise<boolean>;
 

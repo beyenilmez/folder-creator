@@ -15,12 +15,13 @@ import { Home } from "./components/Home";
 import { HomeV2 } from "./components/HomeV2";
 import { ParselSorguComp } from "./components/ParselSorgu";
 import { CiltSayfa } from "./components/CiltSayfa";
+import { Takbis } from "./components/Takbis";
 
 function App() {
   const { config, initialConfig } = useConfig();
   const { t } = useTranslation();
   const { setValue } = useStorage();
-  const [tab, setTab] = useState("homev2");
+  const [tab, setTab] = useState("takbis");
 
   useLayoutEffect(() => {
     if (
@@ -122,6 +123,9 @@ function App() {
               >
                 Tapu
               </TabsTrigger>
+              <TabsTrigger value="takbis" onClick={() => setTab("takbis")}>
+                Takbis
+              </TabsTrigger>
               <TabsTrigger value="settings" onClick={() => setTab("settings")}>
                 {t("nav.settings")}
               </TabsTrigger>
@@ -140,6 +144,9 @@ function App() {
           </TabsContent>
           <TabsContent value="ciltsayfa" className="w-ful h-full">
             <CiltSayfa />
+          </TabsContent>
+          <TabsContent value="takbis" className="w-ful h-full">
+            <Takbis />
           </TabsContent>
           <TabsContent value="settings" className="w-ful h-full">
             <Settings />
