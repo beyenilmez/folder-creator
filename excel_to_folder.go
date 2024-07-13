@@ -130,6 +130,9 @@ func ReadExcel(excelPath string) ([]string, [][]string, *excelize.File, error) {
 
 func generatePatternName(pattern string, headers []string, row []string) string {
 	for i, header := range headers {
+		if i >= len(row) {
+			break
+		}
 		colCell := sanitizeCellFolder(row[i])
 		pattern = replacePlaceholdersFolder(pattern, header, colCell)
 	}

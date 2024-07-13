@@ -6,6 +6,10 @@ export function AddParselSorguFields(arg1, arg2, arg3, arg4, arg5, arg6, arg7, a
   return window['go']['main']['App']['AddParselSorguFields'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }
 
+export function AddTapuToExcel(arg1, arg2, arg3, arg4, arg5) {
+  return window['go']['main']['App']['AddTapuToExcel'](arg1, arg2, arg3, arg4, arg5);
+}
+
 export function CheckForUpdate() {
   return window['go']['main']['App']['CheckForUpdate']();
 }
@@ -68,6 +72,10 @@ export function OpenFile(arg1) {
 
 export function OpenFileInExplorer(arg1) {
   return window['go']['main']['App']['OpenFileInExplorer'](arg1);
+}
+
+export function ParseTapu(arg1) {
+  return window['go']['main']['App']['ParseTapu'](arg1);
 }
 
 export function ParselSorgu(arg1) {

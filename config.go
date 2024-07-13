@@ -45,6 +45,9 @@ type Config struct {
 	AlanCellName         *string `json:"alanCellName"`         // string
 	PaftaCellName        *string `json:"paftaCellName"`        // string
 	ParselSorguHeadless  *bool   `json:"parselSorguHeadless"`  // true, false
+	CiltCellName         *string `json:"ciltCellName"`         // string
+	SayfaCellName        *string `json:"sayfaCellName"`        // string
+	TapuNamePattern      *string `json:"tapuNamePattern"`      // string
 }
 
 func GetDefaultConfig() Config {
@@ -81,6 +84,9 @@ func GetDefaultConfig() Config {
 	defaultAlanCellName := "Alan (m2)"
 	defaultPaftaCellName := "Pafta"
 	defaultParselSorguHeadless := true
+	defaultCiltCellName := "Cilt"
+	defaultSayfaCellName := "Sayfa"
+	defaultTapuNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})/Dosya_Uyap/Tapu/evrak_*.pdf"
 
 	return Config{
 		Theme:                &defaultTheme,
@@ -116,6 +122,9 @@ func GetDefaultConfig() Config {
 		AlanCellName:         &defaultAlanCellName,
 		PaftaCellName:        &defaultPaftaCellName,
 		ParselSorguHeadless:  &defaultParselSorguHeadless,
+		CiltCellName:         &defaultCiltCellName,
+		SayfaCellName:        &defaultSayfaCellName,
+		TapuNamePattern:      &defaultTapuNamePattern,
 	}
 }
 

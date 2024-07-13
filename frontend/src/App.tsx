@@ -14,6 +14,7 @@ import { LogDebug } from "@/wailsjs/runtime/runtime";
 import { Home } from "./components/Home";
 import { HomeV2 } from "./components/HomeV2";
 import { ParselSorguComp } from "./components/ParselSorgu";
+import { CiltSayfa } from "./components/CiltSayfa";
 
 function App() {
   const { config, initialConfig } = useConfig();
@@ -115,6 +116,12 @@ function App() {
               >
                 Parsel Sorgu
               </TabsTrigger>
+              <TabsTrigger
+                value="ciltsayfa"
+                onClick={() => setTab("ciltsayfa")}
+              >
+                Cilt/Sayfa
+              </TabsTrigger>
               <TabsTrigger value="settings" onClick={() => setTab("settings")}>
                 {t("nav.settings")}
               </TabsTrigger>
@@ -130,6 +137,9 @@ function App() {
           </TabsContent>
           <TabsContent value="parselsorgu" className="w-ful h-full">
             <ParselSorguComp />
+          </TabsContent>
+          <TabsContent value="ciltsayfa" className="w-ful h-full">
+            <CiltSayfa />
           </TabsContent>
           <TabsContent value="settings" className="w-ful h-full">
             <Settings />

@@ -21,6 +21,7 @@ type App struct {
 }
 
 var appContext context.Context
+var app *App
 
 // NewApp creates a new App application struct
 func NewApp() *App {
@@ -31,6 +32,7 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 	appContext = ctx
+	app = a
 
 	runtime.LogInfo(appContext, "Starting application")
 
