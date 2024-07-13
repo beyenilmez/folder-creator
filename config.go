@@ -52,6 +52,8 @@ type Config struct {
 	AlanCellNameTapu        *string `json:"alanCellNameTapu"`        // string
 	ExcelHeaderMatchPattern *string `json:"excelHeaderMatchPattern"` // string
 	ExcelCellModifyPattern  *string `json:"excelCellModifyPattern"`  // string
+	MevkiCellNameSorgu      *string `json:"mevkiCellNameSorgu"`      // string
+	CinsCellName            *string `json:"cinsCellName"`            // string
 }
 
 func GetDefaultConfig() Config {
@@ -95,6 +97,8 @@ func GetDefaultConfig() Config {
 	defaultAlanCellNameTapu := "Alan (m2)"
 	defaultExcelHeaderMatchPattern := "Mahalle:Mahalle Ad,Ada:Ada No,Parsel:Parsel No"
 	defaultExcelCellModifyPattern := "Cins->Cins,Mevki->Mevki,Yüzölçüm->Alan (m2),Cilt No->Cilt,Sayfa No->Sayfa,Kadastro Pafta->Pafta"
+	defaultMevkiCellNameSorgu := "Mevki"
+	defaultCinsCellName := "Cins"
 
 	return Config{
 		Theme:                   &defaultTheme,
@@ -137,6 +141,8 @@ func GetDefaultConfig() Config {
 		AlanCellNameTapu:        &defaultAlanCellNameTapu,
 		ExcelHeaderMatchPattern: &defaultExcelHeaderMatchPattern,
 		ExcelCellModifyPattern:  &defaultExcelCellModifyPattern,
+		MevkiCellNameSorgu:      &defaultMevkiCellNameSorgu,
+		CinsCellName:            &defaultCinsCellName,
 	}
 }
 
