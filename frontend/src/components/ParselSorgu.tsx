@@ -21,6 +21,9 @@ export function ParselSorguComp() {
   const [parselCellName, setParselCellName] = useState<string>("");
   const [alanCellName, setAlanCellName] = useState<string>("");
   const [paftaCellName, setPaftaCellName] = useState<string>("");
+  const [cinsCellName, setCinsCellName] = useState<string>("");
+  const [mevkiCellNameSorgu, setMevkiCellNameSorgu] = useState<string>("");
+
   const [parselSorguHeadless, setParselSorguHeadless] =
     useState<boolean>(false);
 
@@ -37,6 +40,8 @@ export function ParselSorguComp() {
     setParselCellName(config?.parselCellName!);
     setAlanCellName(config?.alanCellName!);
     setPaftaCellName(config?.paftaCellName!);
+    setCinsCellName(config?.cinsCellName!);
+    setMevkiCellNameSorgu(config?.mevkiCellNameSorgu!);
     setParselSorguHeadless(config?.parselSorguHeadless!);
   }, [config]);
 
@@ -68,6 +73,8 @@ export function ParselSorguComp() {
       parselCellName,
       alanCellName,
       paftaCellName,
+      cinsCellName,
+      mevkiCellNameSorgu,
       parselSorguHeadless
     ).finally(() => {
       setRunning(false);
@@ -75,7 +82,7 @@ export function ParselSorguComp() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-12 w-full h-full">
+    <div className="flex flex-col justify-center items-center gap-12 p-6 w-full h-full">
       <div className="flex flex-row">
         <div className="flex flex-col items-center gap-2 w-full">
           <label>İl Sütunu</label>
@@ -160,6 +167,30 @@ export function ParselSorguComp() {
             }}
           />
         </div>
+
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Cins Sütunu</label>
+          <Input
+            className="w-[90%]"
+            value={cinsCellName}
+            onChange={(e) => {
+              setConfigField("cinsCellName", e.target.value);
+              setCinsCellName(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Mevki Sütunu</label>
+          <Input
+            className="w-[90%]"
+            value={mevkiCellNameSorgu}
+            onChange={(e) => {
+              setConfigField("mevkiCellNameSorgu", e.target.value);
+              setMevkiCellNameSorgu(e.target.value);
+            }}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col items-center gap-2 w-full">
@@ -205,7 +236,12 @@ export function ParselSorguComp() {
               !mahalleCellName ||
               !adaCellName ||
               !parselCellName ||
-              !(alanCellName || paftaCellName) ||
+              !(
+                alanCellName ||
+                paftaCellName ||
+                cinsCellName ||
+                mevkiCellNameSorgu
+              ) ||
               !excelPath ||
               running
             }
@@ -215,7 +251,7 @@ export function ParselSorguComp() {
             {running ? (
               <LoaderCircle className="w-6 h-6 animate-spin" />
             ) : (
-              "Alan ve Pafta Ekle"
+              "Sütunları Ekle"
             )}
           </Button>
         </div>

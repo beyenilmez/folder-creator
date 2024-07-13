@@ -400,7 +400,7 @@ func (app *App) ParselSorgu(params QueryParams) (Properties, error) {
 
 var alphabet = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ"}
 
-func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mahalleHeader, adaHeader, parselHeader, alanHeader, paftaHeader string, headless bool) error {
+func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mahalleHeader, adaHeader, parselHeader, alanHeader, paftaHeader, cinsHeader, mevkiHeader string, headless bool) error {
 	if !headless {
 		err := app.InitParselSorgu(headless)
 
@@ -420,7 +420,7 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 
 	var il, ilce, mahalle, ada, parsel string
 
-	ilIndex, ilceIndex, mahalleIndex, adaIndex, parselIndex, alanIndex, paftaIndex := -1, -1, -1, -1, -1, -1, -1
+	ilIndex, ilceIndex, mahalleIndex, adaIndex, parselIndex, alanIndex, paftaIndex, cinsIndex, mevkiIndex := -1, -1, -1, -1, -1, -1, -1, -1, -1
 
 	runtime.LogInfo(app.ctx, "Headers: "+fmt.Sprint(headers))
 
@@ -448,6 +448,12 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 		} else if header == paftaHeader {
 			paftaIndex = i
 			runtime.LogInfo(app.ctx, "Matched paftaHeader: "+header)
+		} else if header == cinsHeader {
+			cinsIndex = i
+			runtime.LogInfo(app.ctx, "Matched cinsHeader: "+header)
+		} else if header == mevkiHeader {
+			mevkiIndex = i
+			runtime.LogInfo(app.ctx, "Matched mevkiHeader: "+header)
 		}
 	}
 
@@ -535,6 +541,26 @@ func (app *App) AddParselSorguFields(excelPath string, ilHeader, ilceHeader, mah
 			pafta := properties.Pafta
 
 			err = excel.SetCellStr(sheetName, alphabet[paftaIndex]+fmt.Sprint(i+2), pafta)
+
+			if err != nil {
+				runtime.LogError(app.ctx, err.Error())
+				return err
+			}
+		}
+
+		if cinsHeader != "" {
+			cins := properties.Nitelik
+			err = excel.SetCellStr(sheetName, alphabet[cinsIndex]+fmt.Sprint(i+2), cins)
+
+			if err != nil {
+				runtime.LogError(app.ctx, err.Error())
+				return err
+			}
+		}
+
+		if mevkiHeader != "" {
+			mevki := properties.Mevkii
+			err = excel.SetCellStr(sheetName, alphabet[mevkiIndex]+fmt.Sprint(i+2), mevki)
 
 			if err != nil {
 				runtime.LogError(app.ctx, err.Error())
