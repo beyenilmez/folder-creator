@@ -37,6 +37,8 @@ export namespace main {
 	    ciltCellName?: string;
 	    sayfaCellName?: string;
 	    tapuNamePattern?: string;
+	    mevkiCellName?: string;
+	    alanCellNameTapu?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -80,6 +82,8 @@ export namespace main {
 	        this.ciltCellName = source["ciltCellName"];
 	        this.sayfaCellName = source["sayfaCellName"];
 	        this.tapuNamePattern = source["tapuNamePattern"];
+	        this.mevkiCellName = source["mevkiCellName"];
+	        this.alanCellNameTapu = source["alanCellNameTapu"];
 	    }
 	}
 	export class Properties {

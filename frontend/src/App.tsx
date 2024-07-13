@@ -120,7 +120,7 @@ function App() {
                 value="ciltsayfa"
                 onClick={() => setTab("ciltsayfa")}
               >
-                Cilt/Sayfa
+                Tapu
               </TabsTrigger>
               <TabsTrigger value="settings" onClick={() => setTab("settings")}>
                 {t("nav.settings")}

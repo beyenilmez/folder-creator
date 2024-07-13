@@ -4,7 +4,7 @@ import {main} from '../models';
 
 export function AddParselSorguFields(arg1:string,arg2:string,arg3:string,arg4:string,arg5:string,arg6:string,arg7:string,arg8:string,arg9:boolean):Promise<void>;
 
-export function AddTapuToExcel(arg1:string,arg2:string,arg3:string,arg4:string,arg5:string):Promise<string>;
+export function AddTapuToExcel(arg1:string,arg2:string,arg3:string,arg4:string,arg5:string,arg6:string,arg7:string):Promise<string>;
 
 export function CheckForUpdate():Promise<main.UpdateInfo>;
 

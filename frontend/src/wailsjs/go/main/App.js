@@ -6,8 +6,8 @@ export function AddParselSorguFields(arg1, arg2, arg3, arg4, arg5, arg6, arg7, a
   return window['go']['main']['App']['AddParselSorguFields'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }
 
-export function AddTapuToExcel(arg1, arg2, arg3, arg4, arg5) {
-  return window['go']['main']['App']['AddTapuToExcel'](arg1, arg2, arg3, arg4, arg5);
+export function AddTapuToExcel(arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+  return window['go']['main']['App']['AddTapuToExcel'](arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 }
 
 export function CheckForUpdate() {

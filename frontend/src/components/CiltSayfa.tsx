@@ -17,6 +17,8 @@ export function CiltSayfa() {
 
   const [ciltCellName, setCiltCellName] = useState<string>("");
   const [sayfaCellName, setSayfaCellName] = useState<string>("");
+  const [mevkiCellName, setMevkiCellName] = useState<string>("");
+  const [alanCellNameTapu, setAlanCellNameTapu] = useState<string>("");
 
   const [excelPath, setExcelPath] = useState<string>("");
   const [folderPath, setFolderPath] = useState<string>("");
@@ -29,6 +31,8 @@ export function CiltSayfa() {
     setCiltCellName(config?.ciltCellName!);
     setSayfaCellName(config?.sayfaCellName!);
     setTapuNamePattern(config?.tapuNamePattern!);
+    setMevkiCellName(config?.mevkiCellName!);
+    setAlanCellNameTapu(config?.alanCellNameTapu!);
   }, [config]);
 
   window.setCiltMessage = (message: string) => {
@@ -56,7 +60,9 @@ export function CiltSayfa() {
       folderPath,
       tapuNamePattern,
       ciltCellName,
-      sayfaCellName
+      sayfaCellName,
+      mevkiCellName,
+      alanCellNameTapu
     )
       .then((error) => {
         if (error !== "") {
@@ -91,6 +97,30 @@ export function CiltSayfa() {
             onChange={(e) => {
               setConfigField("sayfaCellName", e.target.value);
               setSayfaCellName(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Mevki Sütunu</label>
+          <Input
+            className="w-[90%]"
+            value={mevkiCellName}
+            onChange={(e) => {
+              setConfigField("mevkiCellName", e.target.value);
+              setMevkiCellName(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Alan Sütunu</label>
+          <Input
+            className="w-[90%]"
+            value={alanCellNameTapu}
+            onChange={(e) => {
+              setConfigField("alanCellNameTapu", e.target.value);
+              setAlanCellNameTapu(e.target.value);
             }}
           />
         </div>
@@ -166,7 +196,12 @@ export function CiltSayfa() {
           disabled={
             !folderPath ||
             !tapuNamePattern ||
-            !(sayfaCellName || ciltCellName) ||
+            !(
+              sayfaCellName ||
+              ciltCellName ||
+              mevkiCellName ||
+              alanCellNameTapu
+            ) ||
             !excelPath ||
             running
           }
@@ -176,7 +211,7 @@ export function CiltSayfa() {
           {running ? (
             <LoaderCircle className="w-6 h-6 animate-spin" />
           ) : (
-            "Cilt ve Sayfa Ekle"
+            "Sütunları Ekle"
           )}
         </Button>
       </div>
