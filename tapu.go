@@ -18,11 +18,13 @@ import (
 )
 
 type Tapu struct {
-	Cilt  string
-	Sayfa string
+	Cilt  int
+	Sayfa int
+	Mevki string
+	Alan  float64
 }
 
-func (app *App) AddTapuToExcel(excelPath string, path string, tapuPathPattern string, ciltHeader string, sayfaHeader string) string {
+func (app *App) AddTapuToExcel(excelPath string, path string, tapuPathPattern string, ciltHeader string, sayfaHeader string, mevkiHeader string, alanHeader string) string {
 	runtime.LogInfo(app.ctx, "Adding tapu to "+excelPath)
 
 	headers, rows, excel, err := ReadExcel(excelPath)
@@ -35,6 +37,8 @@ func (app *App) AddTapuToExcel(excelPath string, path string, tapuPathPattern st
 
 	ciltIndex := -1
 	sayfaIndex := -1
+	mevkiIndex := -1
+	alanIndex := -1
 
 	for i, header := range headers {
 		header = strings.TrimSpace(header)
@@ -45,14 +49,15 @@ func (app *App) AddTapuToExcel(excelPath string, path string, tapuPathPattern st
 		if header == sayfaHeader {
 			sayfaIndex = i
 		}
+		if header == mevkiHeader {
+			mevkiIndex = i
+		}
+		if header == alanHeader {
+			alanIndex = i
+		}
 	}
 
-	if ciltIndex == -1 && sayfaIndex == -1 {
-		runtime.LogError(app.ctx, "Cilt and Sayfa header not found")
-		return err.Error()
-	}
-
-	runtime.LogInfo(app.ctx, "Indexes: Cilt: "+fmt.Sprint(ciltIndex)+" Sayfa: "+fmt.Sprint(sayfaIndex))
+	runtime.LogInfo(app.ctx, "Indexes: Cilt: "+fmt.Sprint(ciltIndex)+" Sayfa: "+fmt.Sprint(sayfaIndex)+" Mevki: "+fmt.Sprint(mevkiIndex)+" Alan: "+fmt.Sprint(alanIndex))
 
 	for i, row := range rows {
 		runtime.WindowExecJS(appContext, `window.setCiltMessage("`+fmt.Sprintf("%d/%d", i+1, len(rows))+`");`)
@@ -87,27 +92,31 @@ func (app *App) AddTapuToExcel(excelPath string, path string, tapuPathPattern st
 			}
 
 			if ciltIndex != -1 {
-				numberCilt, err := strconv.Atoi(tapu.Cilt)
+				err = excel.SetCellInt(sheetName, alphabet[ciltIndex]+fmt.Sprint(i+2), tapu.Cilt)
+
 				if err != nil {
 					runtime.LogError(app.ctx, err.Error())
-				} else {
-					err = excel.SetCellInt(sheetName, alphabet[ciltIndex]+fmt.Sprint(i+2), numberCilt)
-
-					if err != nil {
-						runtime.LogError(app.ctx, err.Error())
-					}
 				}
 			}
 			if sayfaIndex != -1 {
-				numberSayfa, err := strconv.Atoi(tapu.Sayfa)
+				err = excel.SetCellInt(sheetName, alphabet[sayfaIndex]+fmt.Sprint(i+2), tapu.Sayfa)
+
 				if err != nil {
 					runtime.LogError(app.ctx, err.Error())
-				} else {
-					err = excel.SetCellInt(sheetName, alphabet[sayfaIndex]+fmt.Sprint(i+2), numberSayfa)
+				}
+			}
+			if mevkiIndex != -1 {
+				err = excel.SetCellStr(sheetName, alphabet[mevkiIndex]+fmt.Sprint(i+2), tapu.Mevki)
 
-					if err != nil {
-						runtime.LogError(app.ctx, err.Error())
-					}
+				if err != nil {
+					runtime.LogError(app.ctx, err.Error())
+				}
+			}
+			if alanIndex != -1 {
+				err = excel.SetCellFloat(sheetName, alphabet[alanIndex]+fmt.Sprint(i+2), tapu.Alan, 2, 64)
+
+				if err != nil {
+					runtime.LogError(app.ctx, err.Error())
 				}
 			}
 		}
@@ -152,6 +161,8 @@ func FilterDirs(path string) ([]string, error) {
 }
 
 func (app *App) ParseTapu(path string) (Tapu, error) {
+	var tapu Tapu
+
 	runtime.LogInfo(app.ctx, "Parsing "+path)
 
 	err := installXpdf()
@@ -167,6 +178,8 @@ func (app *App) ParseTapu(path string) (Tapu, error) {
 		return Tapu{}, err
 	}
 
+	found := false
+
 	for _, line := range strings.Split(content, "\n") {
 		if strings.Contains(line, "Cilt") {
 			split := strings.Split(line, ":")
@@ -176,11 +189,63 @@ func (app *App) ParseTapu(path string) (Tapu, error) {
 			sayfa := strings.TrimSpace(splitRight[1])
 
 			runtime.LogInfo(app.ctx, "Cilt: "+cilt+" Sayfa: "+sayfa)
-			return Tapu{Cilt: cilt, Sayfa: sayfa}, nil
+
+			numberSayfa, err := strconv.Atoi(sayfa)
+			if err != nil {
+				runtime.LogError(app.ctx, err.Error())
+				return Tapu{}, err
+			}
+
+			numberCilt, err := strconv.Atoi(cilt)
+			if err != nil {
+				runtime.LogError(app.ctx, err.Error())
+				return Tapu{}, err
+			}
+
+			tapu.Cilt = numberCilt
+			tapu.Sayfa = numberSayfa
+
+			found = true
+		} else if strings.Contains(line, "Mevki") {
+			split := strings.Split(line, ":")
+
+			tapu.Mevki = strings.TrimSpace(split[1])
+			tapu.Mevki = toTitleCaseWord(tapu.Mevki)
+
+			found = true
+		} else if strings.Contains(line, "Yüzölçüm") {
+			splitSpace := strings.Split(line, " ")
+
+			// find Yüzölçüm in split
+			for i, word := range splitSpace {
+				if word == "Yüzölçüm" && i+2 < len(splitSpace) {
+					alanString := strings.TrimSpace(splitSpace[i+2])
+					alanString = strings.ReplaceAll(alanString, "m2", "")
+					alanString = strings.TrimSpace(alanString)
+					alanString = strings.ReplaceAll(alanString, ".", "")
+					alanString = strings.ReplaceAll(alanString, ",", ".")
+
+					alan, err := strconv.ParseFloat(alanString, 64)
+
+					if err != nil {
+						runtime.LogError(app.ctx, err.Error())
+						return Tapu{}, err
+					}
+
+					tapu.Alan = alan
+
+					found = true
+				}
+			}
+
 		}
 	}
 
-	return Tapu{}, fmt.Errorf("tapu not found")
+	if !found {
+		return tapu, fmt.Errorf("Tapu bilgisi bulunamadı")
+	}
+
+	return tapu, nil
 }
 
 func ReadPlainTextFromPDF(pdfpath string) (text string, err error) {

@@ -12,42 +12,46 @@ import (
 )
 
 type Config struct {
-	Theme                *string `json:"theme"`                // system, light, dark
-	UseSystemTitleBar    *bool   `json:"useSystemTitleBar"`    // true, false
-	EnableLogging        *bool   `json:"enableLogging"`        // true, false
-	EnableTrace          *bool   `json:"enableTrace"`          // true, false
-	EnableDebug          *bool   `json:"enableDebug"`          // true, false
-	EnableInfo           *bool   `json:"enableInfo"`           // true, false
-	EnableWarn           *bool   `json:"enableWarn"`           // true, false
-	EnableError          *bool   `json:"enableError"`          // true, false
-	EnableFatal          *bool   `json:"enableFatal"`          // true, false
-	MaxLogFiles          *int    `json:"maxLogFiles"`          // int
-	Language             *string `json:"language"`             // en-US, tr-TR
-	SaveWindowStatus     *bool   `json:"saveWindowStatus"`     // true, false
-	WindowStartState     *int    `json:"windowStartState"`     // 0 = Normal, 1 = Maximized, 2 = Minimized, 3 = Fullscreen
-	WindowStartPositionX *int    `json:"windowStartPositionX"` // x
-	WindowStartPositionY *int    `json:"windowStartPositionY"` // y
-	WindowStartSizeX     *int    `json:"windowStartSizeX"`     // x
-	WindowStartSizeY     *int    `json:"windowStartSizeY"`     // y
-	WindowScale          *int    `json:"windowScale"`          // %
-	Opacity              *int    `json:"opacity"`              // %
-	WindowEffect         *int    `json:"windowEffect"`         // 0 = Auto, 1 = None, 2 = Mica, 3 = Acrylic, 4 = Tabbed
-	CheckForUpdates      *bool   `json:"checkForUpdates"`      // true, false
-	LastUpdateCheck      *int    `json:"lastUpdateCheck"`      // unix timestamp
-	FolderNamePattern    *string `json:"folderNamePattern"`    // string
-	WordFileNamePattern  *string `json:"wordFileNamePattern"`  // string
-	FileNamePattern      *string `json:"fileNamePattern"`      // string
-	IlCellName           *string `json:"ilCellName"`           // string
-	IlceCellName         *string `json:"ilceCellName"`         // string
-	MahalleCellName      *string `json:"mahalleCellName"`      // string
-	AdaCellName          *string `json:"adaCellName"`          // string
-	ParselCellName       *string `json:"parselCellName"`       // string
-	AlanCellName         *string `json:"alanCellName"`         // string
-	PaftaCellName        *string `json:"paftaCellName"`        // string
-	ParselSorguHeadless  *bool   `json:"parselSorguHeadless"`  // true, false
-	CiltCellName         *string `json:"ciltCellName"`         // string
-	SayfaCellName        *string `json:"sayfaCellName"`        // string
-	TapuNamePattern      *string `json:"tapuNamePattern"`      // string
+	Theme                   *string `json:"theme"`                   // system, light, dark
+	UseSystemTitleBar       *bool   `json:"useSystemTitleBar"`       // true, false
+	EnableLogging           *bool   `json:"enableLogging"`           // true, false
+	EnableTrace             *bool   `json:"enableTrace"`             // true, false
+	EnableDebug             *bool   `json:"enableDebug"`             // true, false
+	EnableInfo              *bool   `json:"enableInfo"`              // true, false
+	EnableWarn              *bool   `json:"enableWarn"`              // true, false
+	EnableError             *bool   `json:"enableError"`             // true, false
+	EnableFatal             *bool   `json:"enableFatal"`             // true, false
+	MaxLogFiles             *int    `json:"maxLogFiles"`             // int
+	Language                *string `json:"language"`                // en-US, tr-TR
+	SaveWindowStatus        *bool   `json:"saveWindowStatus"`        // true, false
+	WindowStartState        *int    `json:"windowStartState"`        // 0 = Normal, 1 = Maximized, 2 = Minimized, 3 = Fullscreen
+	WindowStartPositionX    *int    `json:"windowStartPositionX"`    // x
+	WindowStartPositionY    *int    `json:"windowStartPositionY"`    // y
+	WindowStartSizeX        *int    `json:"windowStartSizeX"`        // x
+	WindowStartSizeY        *int    `json:"windowStartSizeY"`        // y
+	WindowScale             *int    `json:"windowScale"`             // %
+	Opacity                 *int    `json:"opacity"`                 // %
+	WindowEffect            *int    `json:"windowEffect"`            // 0 = Auto, 1 = None, 2 = Mica, 3 = Acrylic, 4 = Tabbed
+	CheckForUpdates         *bool   `json:"checkForUpdates"`         // true, false
+	LastUpdateCheck         *int    `json:"lastUpdateCheck"`         // unix timestamp
+	FolderNamePattern       *string `json:"folderNamePattern"`       // string
+	WordFileNamePattern     *string `json:"wordFileNamePattern"`     // string
+	FileNamePattern         *string `json:"fileNamePattern"`         // string
+	IlCellName              *string `json:"ilCellName"`              // string
+	IlceCellName            *string `json:"ilceCellName"`            // string
+	MahalleCellName         *string `json:"mahalleCellName"`         // string
+	AdaCellName             *string `json:"adaCellName"`             // string
+	ParselCellName          *string `json:"parselCellName"`          // string
+	AlanCellName            *string `json:"alanCellName"`            // string
+	PaftaCellName           *string `json:"paftaCellName"`           // string
+	ParselSorguHeadless     *bool   `json:"parselSorguHeadless"`     // true, false
+	CiltCellName            *string `json:"ciltCellName"`            // string
+	SayfaCellName           *string `json:"sayfaCellName"`           // string
+	TapuNamePattern         *string `json:"tapuNamePattern"`         // string
+	MevkiCellName           *string `json:"mevkiCellName"`           // string
+	AlanCellNameTapu        *string `json:"alanCellNameTapu"`        // string
+	ExcelHeaderMatchPattern *string `json:"excelHeaderMatchPattern"` // string
+	ExcelCellModifyPattern  *string `json:"excelCellModifyPattern"`  // string
 }
 
 func GetDefaultConfig() Config {
@@ -87,44 +91,52 @@ func GetDefaultConfig() Config {
 	defaultCiltCellName := "Cilt"
 	defaultSayfaCellName := "Sayfa"
 	defaultTapuNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})/Dosya_Uyap/Tapu/evrak_*.pdf"
+	defaultMevkiCellName := "Mevki"
+	defaultAlanCellNameTapu := "Alan (m2)"
+	defaultExcelHeaderMatchPattern := "Mahalle:Mahalle Ad,Ada:Ada No,Parsel:Parsel No"
+	defaultExcelCellModifyPattern := "Cins->Cins,Mevki->Mevki,Yüzölçüm->Alan (m2),Cilt No->Cilt,Sayfa No->Sayfa,Kadastro Pafta->Pafta"
 
 	return Config{
-		Theme:                &defaultTheme,
-		UseSystemTitleBar:    &defaultUseSystemTitleBar,
-		EnableLogging:        &defaultEnableLogging,
-		EnableTrace:          &defaultEnableTrace,
-		EnableDebug:          &defaultEnableDebug,
-		EnableInfo:           &defaultEnableInfo,
-		EnableWarn:           &defaultEnableWarn,
-		EnableError:          &defaultEnableError,
-		EnableFatal:          &defaultEnableFatal,
-		MaxLogFiles:          &defaultMaxLogFiles,
-		Language:             &defaultLanguage,
-		SaveWindowStatus:     &defaultSaveWindowStatus,
-		WindowStartState:     &defaultWindowStartState,
-		WindowStartPositionX: &defaultWindowStartPositionX,
-		WindowStartPositionY: &defaultWindowStartPositionY,
-		WindowStartSizeX:     &defaultWindowStartSizeX,
-		WindowStartSizeY:     &defaultWindowStartSizeY,
-		WindowScale:          &defaultWindowScale,
-		Opacity:              &defaultOpacity,
-		WindowEffect:         &defaultWindowEffect,
-		CheckForUpdates:      &defaultCheckForUpdates,
-		LastUpdateCheck:      &defaultLastUpdateCheck,
-		FolderNamePattern:    &defaultFolderNamePattern,
-		WordFileNamePattern:  &defaultWordFileNamePattern,
-		FileNamePattern:      &defaultFileNamePattern,
-		IlCellName:           &defaultIlCellName,
-		IlceCellName:         &defaultIlceCellName,
-		MahalleCellName:      &defaultMahalleCellName,
-		AdaCellName:          &defaultAdaCellName,
-		ParselCellName:       &defaultParselCellName,
-		AlanCellName:         &defaultAlanCellName,
-		PaftaCellName:        &defaultPaftaCellName,
-		ParselSorguHeadless:  &defaultParselSorguHeadless,
-		CiltCellName:         &defaultCiltCellName,
-		SayfaCellName:        &defaultSayfaCellName,
-		TapuNamePattern:      &defaultTapuNamePattern,
+		Theme:                   &defaultTheme,
+		UseSystemTitleBar:       &defaultUseSystemTitleBar,
+		EnableLogging:           &defaultEnableLogging,
+		EnableTrace:             &defaultEnableTrace,
+		EnableDebug:             &defaultEnableDebug,
+		EnableInfo:              &defaultEnableInfo,
+		EnableWarn:              &defaultEnableWarn,
+		EnableError:             &defaultEnableError,
+		EnableFatal:             &defaultEnableFatal,
+		MaxLogFiles:             &defaultMaxLogFiles,
+		Language:                &defaultLanguage,
+		SaveWindowStatus:        &defaultSaveWindowStatus,
+		WindowStartState:        &defaultWindowStartState,
+		WindowStartPositionX:    &defaultWindowStartPositionX,
+		WindowStartPositionY:    &defaultWindowStartPositionY,
+		WindowStartSizeX:        &defaultWindowStartSizeX,
+		WindowStartSizeY:        &defaultWindowStartSizeY,
+		WindowScale:             &defaultWindowScale,
+		Opacity:                 &defaultOpacity,
+		WindowEffect:            &defaultWindowEffect,
+		CheckForUpdates:         &defaultCheckForUpdates,
+		LastUpdateCheck:         &defaultLastUpdateCheck,
+		FolderNamePattern:       &defaultFolderNamePattern,
+		WordFileNamePattern:     &defaultWordFileNamePattern,
+		FileNamePattern:         &defaultFileNamePattern,
+		IlCellName:              &defaultIlCellName,
+		IlceCellName:            &defaultIlceCellName,
+		MahalleCellName:         &defaultMahalleCellName,
+		AdaCellName:             &defaultAdaCellName,
+		ParselCellName:          &defaultParselCellName,
+		AlanCellName:            &defaultAlanCellName,
+		PaftaCellName:           &defaultPaftaCellName,
+		ParselSorguHeadless:     &defaultParselSorguHeadless,
+		CiltCellName:            &defaultCiltCellName,
+		SayfaCellName:           &defaultSayfaCellName,
+		TapuNamePattern:         &defaultTapuNamePattern,
+		MevkiCellName:           &defaultMevkiCellName,
+		AlanCellNameTapu:        &defaultAlanCellNameTapu,
+		ExcelHeaderMatchPattern: &defaultExcelHeaderMatchPattern,
+		ExcelCellModifyPattern:  &defaultExcelCellModifyPattern,
 	}
 }
 

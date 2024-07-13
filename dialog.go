@@ -64,6 +64,26 @@ func (a *App) GetLoadConfigPath() string {
 	return path
 }
 
+func (a *App) GetExcelFilesDialog() []string {
+	paths, err := runtime.OpenMultipleFilesDialog(a.ctx, runtime.OpenDialogOptions{
+		Title:                "Excel dosyalarını seçin",
+		CanCreateDirectories: true,
+		Filters: []runtime.FileFilter{
+			{
+				DisplayName: "Excel",
+				Pattern:     "*.xlsx;*.xls",
+			},
+		},
+	})
+
+	if err != nil {
+		runtime.LogWarning(a.ctx, err.Error())
+		return nil
+	}
+
+	return paths
+}
+
 func (a *App) OpenFileInExplorer(path string) {
 	runtime.LogInfo(a.ctx, "Opening file in explorer: "+path)
 

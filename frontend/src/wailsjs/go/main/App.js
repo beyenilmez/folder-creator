@@ -6,8 +6,8 @@ export function AddParselSorguFields(arg1, arg2, arg3, arg4, arg5, arg6, arg7, a
   return window['go']['main']['App']['AddParselSorguFields'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }
 
-export function AddTapuToExcel(arg1, arg2, arg3, arg4, arg5) {
-  return window['go']['main']['App']['AddTapuToExcel'](arg1, arg2, arg3, arg4, arg5);
+export function AddTapuToExcel(arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+  return window['go']['main']['App']['AddTapuToExcel'](arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 }
 
 export function CheckForUpdate() {
@@ -38,6 +38,10 @@ export function GetExcelFileDialog() {
   return window['go']['main']['App']['GetExcelFileDialog']();
 }
 
+export function GetExcelFilesDialog() {
+  return window['go']['main']['App']['GetExcelFilesDialog']();
+}
+
 export function GetFileDialog() {
   return window['go']['main']['App']['GetFileDialog']();
 }
@@ -60,6 +64,10 @@ export function GetWordFileDialog() {
 
 export function InitParselSorgu(arg1) {
   return window['go']['main']['App']['InitParselSorgu'](arg1);
+}
+
+export function ModifyExcelWithTakbis(arg1, arg2, arg3, arg4) {
+  return window['go']['main']['App']['ModifyExcelWithTakbis'](arg1, arg2, arg3, arg4);
 }
 
 export function NeedsAdminPrivileges() {
