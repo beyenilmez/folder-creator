@@ -14,6 +14,8 @@ var savedConfigFolder string
 var configPath string
 var appIconPath string
 
+var pdfToTextPath string
+
 func path_init() error {
 	appData, err := os.UserConfigDir()
 	if err != nil {
@@ -25,6 +27,9 @@ func path_init() error {
 	runtime.LogDebug(appContext, "Found user config directory: "+appData)
 
 	appFolder = path.Join(appData, "folder-creator")
+
+	pdfToTextPath = path.Join(appFolder, "xpdf-tools", "xpdf-tools-win-4.05", "bin64", "pdftotext.exe")
+
 	logsFolder = path.Join(appFolder, "logs")
 	savedConfigFolder = path.Join(appFolder, "savedconfigs")
 

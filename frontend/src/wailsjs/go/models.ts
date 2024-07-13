@@ -34,6 +34,9 @@ export namespace main {
 	    alanCellName?: string;
 	    paftaCellName?: string;
 	    parselSorguHeadless?: boolean;
+	    ciltCellName?: string;
+	    sayfaCellName?: string;
+	    tapuNamePattern?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -74,6 +77,9 @@ export namespace main {
 	        this.alanCellName = source["alanCellName"];
 	        this.paftaCellName = source["paftaCellName"];
 	        this.parselSorguHeadless = source["parselSorguHeadless"];
+	        this.ciltCellName = source["ciltCellName"];
+	        this.sayfaCellName = source["sayfaCellName"];
+	        this.tapuNamePattern = source["tapuNamePattern"];
 	    }
 	}
 	export class Properties {
@@ -122,6 +128,18 @@ export namespace main {
 	        this.neighborhood = source["neighborhood"];
 	        this.block = source["block"];
 	        this.parcel = source["parcel"];
+	    }
+	}
+	export class Tapu {
+	
+	
+	    static createFrom(source: any = {}) {
+	        return new Tapu(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	
 	    }
 	}
 	export class UpdateInfo {
