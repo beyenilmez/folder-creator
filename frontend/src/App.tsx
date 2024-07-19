@@ -18,10 +18,10 @@ import { CiltSayfa } from "./components/CiltSayfa";
 import { Takbis } from "./components/Takbis";
 
 function App() {
-  const { config, initialConfig } = useConfig();
+  const { config, setConfigField, initialConfig } = useConfig();
   const { t } = useTranslation();
   const { setValue } = useStorage();
-  const [tab, setTab] = useState("takbis");
+  const [tab, setTab] = useState("packs");
 
   useLayoutEffect(() => {
     if (
@@ -41,7 +41,15 @@ function App() {
         ).toString()
       );
     }
+
+    if (config && config.tabId != undefined) {
+      setTab(config.tabId);
+    }
   }, [config?.windowScale, config?.opacity, initialConfig?.windowEffect]);
+
+  useEffect(() => {
+    setConfigField("tabId", tab);
+  }, [tab]);
 
   window.toast = ({ title, description, path, variant }: any) => {
     const props = {
