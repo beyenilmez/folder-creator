@@ -43,6 +43,7 @@ export namespace main {
 	    excelCellModifyPattern?: string;
 	    mevkiCellNameSorgu?: string;
 	    cinsCellName?: string;
+	    tabId?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -92,6 +93,7 @@ export namespace main {
 	        this.excelCellModifyPattern = source["excelCellModifyPattern"];
 	        this.mevkiCellNameSorgu = source["mevkiCellNameSorgu"];
 	        this.cinsCellName = source["cinsCellName"];
+	        this.tabId = source["tabId"];
 	    }
 	}
 	export class Properties {

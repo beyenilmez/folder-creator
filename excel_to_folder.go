@@ -246,23 +246,23 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 
 		if copyFolderPath != "" {
 			if err := copyFolderContents(copyFolderPath, targetFolderPath); err != nil {
-				runtime.LogError(a.ctx, err.Error())
+				runtime.LogError(a.ctx, "Failed to copy folder contents: "+err.Error())
 				continue
 			}
 		}
 
 		if wordPath != "" {
 			if err := createWordDocument(wordPath, wordFileNamePattern, headers, rows[i], targetFolderPath); err != nil {
-				runtime.LogError(a.ctx, err.Error())
+				runtime.LogError(a.ctx, "Failed to create word document: "+err.Error())
 				continue
 			}
 		}
 
-		if fileNamePattern != "" {
+		if filePath != "" {
 			fileName := generatePatternName(fileNamePattern, headers, rows[i])
 
 			if err := copyFile(filePath, filepath.Join(targetFolderPath, fileName)); err != nil {
-				runtime.LogError(a.ctx, err.Error())
+				runtime.LogError(a.ctx, "Failed to copy file: "+err.Error())
 				continue
 			}
 		}
@@ -314,13 +314,17 @@ func createWordDocument(filePath string, wordFileNamePattern string, headers []s
 	r, err := docx.ReadDocxFile(filePath)
 
 	if err != nil {
-		runtime.LogError(appContext, err.Error())
+		runtime.LogError(appContext, "Failed to read docx file: "+err.Error())
 		return err
 	}
 
 	docx1 := r.Editable()
 
 	for i, header := range headers {
+		if i >= len(row) {
+			runtime.LogWarning(appContext, "Row is shorter than headers")
+			break
+		}
 		colCell := sanitizeCellWord(row[i])
 		replacePlaceholdersWord(docx1, header, colCell)
 	}
@@ -335,7 +339,7 @@ func createWordDocument(filePath string, wordFileNamePattern string, headers []s
 	err = r.Close()
 
 	if err != nil {
-		runtime.LogError(appContext, err.Error())
+		runtime.LogError(appContext, "Failed to close docx file: "+err.Error())
 		return err
 	}
 

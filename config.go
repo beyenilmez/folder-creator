@@ -54,6 +54,7 @@ type Config struct {
 	ExcelCellModifyPattern  *string `json:"excelCellModifyPattern"`  // string
 	MevkiCellNameSorgu      *string `json:"mevkiCellNameSorgu"`      // string
 	CinsCellName            *string `json:"cinsCellName"`            // string
+	TabId                   *string `json:"tabId"`                   // string
 }
 
 func GetDefaultConfig() Config {
@@ -99,6 +100,7 @@ func GetDefaultConfig() Config {
 	defaultExcelCellModifyPattern := "Cins->Cins,Mevki->Mevki,Yüzölçüm->Alan (m2),Cilt No->Cilt,Sayfa No->Sayfa,Kadastro Pafta->Pafta"
 	defaultMevkiCellNameSorgu := "Mevki"
 	defaultCinsCellName := "Cins"
+	defaultTabId := "packs"
 
 	return Config{
 		Theme:                   &defaultTheme,
@@ -143,6 +145,7 @@ func GetDefaultConfig() Config {
 		ExcelCellModifyPattern:  &defaultExcelCellModifyPattern,
 		MevkiCellNameSorgu:      &defaultMevkiCellNameSorgu,
 		CinsCellName:            &defaultCinsCellName,
+		TabId:                   &defaultTabId,
 	}
 }
 

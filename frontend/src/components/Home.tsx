@@ -166,7 +166,7 @@ export function Home() {
 
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleFileDialog}>
-          Dosya Seçin
+          Bilirkişi Dilekçesi Seçin
         </Button>
         <div className="flex h-4">
           <Button
@@ -192,7 +192,7 @@ export function Home() {
 
       <div className="flex flex-col items-center gap-2 w-full">
         <Button variant={"outline"} onClick={handleCopyFolder}>
-          Klasör İçeriği Seçin
+          Kopyalanacak Klasör Seçin
         </Button>
         <div className="flex h-4">
           <Button
