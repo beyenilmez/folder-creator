@@ -24,6 +24,7 @@ export namespace main {
 	    checkForUpdates?: boolean;
 	    lastUpdateCheck?: number;
 	    folderNamePattern?: string;
+	    createFolder?: boolean;
 	    wordFileNamePattern?: string;
 	    fileNamePattern?: string;
 	    ilCellName?: string;
@@ -74,6 +75,7 @@ export namespace main {
 	        this.checkForUpdates = source["checkForUpdates"];
 	        this.lastUpdateCheck = source["lastUpdateCheck"];
 	        this.folderNamePattern = source["folderNamePattern"];
+	        this.createFolder = source["createFolder"];
 	        this.wordFileNamePattern = source["wordFileNamePattern"];
 	        this.fileNamePattern = source["fileNamePattern"];
 	        this.ilCellName = source["ilCellName"];
