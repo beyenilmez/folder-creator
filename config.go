@@ -35,6 +35,7 @@ type Config struct {
 	CheckForUpdates         *bool   `json:"checkForUpdates"`         // true, false
 	LastUpdateCheck         *int    `json:"lastUpdateCheck"`         // unix timestamp
 	FolderNamePattern       *string `json:"folderNamePattern"`       // string
+	CreateFolder            *bool   `json:"createFolder"`            // true, false
 	WordFileNamePattern     *string `json:"wordFileNamePattern"`     // string
 	FileNamePattern         *string `json:"fileNamePattern"`         // string
 	IlCellName              *string `json:"ilCellName"`              // string
@@ -81,8 +82,9 @@ func GetDefaultConfig() Config {
 	defaultCheckForUpdates := true
 	defaultLastUpdateCheck := 0
 	defaultFolderNamePattern := "{Dosya No}_{{Mahalle}}_{Ada}_{Parsel}({Davacı})"
+	defaultCreateFolder := true
 	defaultWordFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Raporu-FEN"
-	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN.udf"
+	defaultFileNamePattern := "{Mahkeme}Ahm_{Dosya No} Bilirkişi Dilekçesi-FEN"
 	defaultIlCellName := "Konya"
 	defaultIlceCellName := "İlçesi"
 	defaultMahalleCellName := "Mahalle"
@@ -126,6 +128,7 @@ func GetDefaultConfig() Config {
 		CheckForUpdates:         &defaultCheckForUpdates,
 		LastUpdateCheck:         &defaultLastUpdateCheck,
 		FolderNamePattern:       &defaultFolderNamePattern,
+		CreateFolder:            &defaultCreateFolder,
 		WordFileNamePattern:     &defaultWordFileNamePattern,
 		FileNamePattern:         &defaultFileNamePattern,
 		IlCellName:              &defaultIlCellName,

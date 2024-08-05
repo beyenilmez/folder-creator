@@ -241,7 +241,7 @@ func toTitleCaseWord(text string) string {
 	return strings.Join(words, " ")
 }
 
-func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, wordFileNamePattern string, fileNamePattern string, filePath string) string {
+func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, createFolderConfig bool, wordFileNamePattern string, fileNamePattern string, filePath string) string {
 	headers, rows, err := ReadExcelRows(excelPath)
 
 	runtime.LogDebug(a.ctx, "Headers: "+strings.Join(headers, ","))
@@ -254,7 +254,13 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 	folderNames := generateFolderNames(folderNamePattern, headers, rows)
 
 	for i, folderName := range folderNames {
-		targetFolderPath := filepath.Join(targetPath, folderName)
+		var targetFolderPath string
+
+		if createFolderConfig {
+			targetFolderPath = filepath.Join(targetPath, folderName)
+		} else {
+			targetFolderPath = targetPath
+		}
 
 		if err := createFolder(targetFolderPath); err != nil {
 			runtime.LogError(a.ctx, "Failed to create folder: "+err.Error())

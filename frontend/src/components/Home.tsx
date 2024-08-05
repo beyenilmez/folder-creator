@@ -15,6 +15,7 @@ import { Input } from "./ui/input";
 import { useConfig } from "@/contexts/config-provider";
 import { LogDebug } from "@/wailsjs/runtime/runtime";
 import { LoaderCircle, X } from "lucide-react";
+import { Switch } from "./ui/switch";
 
 export function Home() {
   const { config, setConfigField } = useConfig();
@@ -25,6 +26,7 @@ export function Home() {
   const [copyFolder, setCopyFolder] = useState<string>("");
   const [targetFolder, setTargetFolder] = useState<string>("");
   const [folderNamePattern, setFolderNamePattern] = useState<string>("");
+  const [createFolder, setCreateFolder] = useState<boolean>(false);
   const [wordFileNamePattern, setWordFileNamePattern] = useState<string>("");
   const [fileNamePattern, setFileNamePattern] = useState<string>("");
 
@@ -33,6 +35,7 @@ export function Home() {
 
   useEffect(() => {
     setFolderNamePattern(config?.folderNamePattern!);
+    setCreateFolder(config?.createFolder!);
     setWordFileNamePattern(config?.wordFileNamePattern!);
     setFileNamePattern(config?.fileNamePattern!);
   }, [config]);
@@ -77,6 +80,7 @@ export function Home() {
         copyFolder,
         targetFolder,
         folderNamePattern,
+        createFolder,
         wordFileNamePattern,
         fileNamePattern,
         filePath
@@ -251,6 +255,16 @@ export function Home() {
               setFolderNamePattern(e.target.value);
             }}
           />
+          <div className="flex justify-center items-center gap-2">
+            Klasör oluştur
+            <Switch
+              checked={createFolder}
+              onCheckedChange={() => {
+                setConfigField("createFolder", !createFolder);
+                setCreateFolder(!createFolder);
+              }}
+            />
+          </div>
         </div>
         <div className="flex flex-col items-center gap-2 w-full">
           <label>Word Dosyası Adı</label>
