@@ -56,6 +56,7 @@ type Config struct {
 	MevkiCellNameSorgu      *string `json:"mevkiCellNameSorgu"`      // string
 	CinsCellName            *string `json:"cinsCellName"`            // string
 	TabId                   *string `json:"tabId"`                   // string
+	WordReplaceRules        *string `json:"wordReplaceRules"`        // string
 }
 
 func GetDefaultConfig() Config {
@@ -103,6 +104,7 @@ func GetDefaultConfig() Config {
 	defaultMevkiCellNameSorgu := "Mevki"
 	defaultCinsCellName := "Cins"
 	defaultTabId := "packs"
+	defaultWordReplaceRules := `(K)->(Köyü),(M)->""`
 
 	return Config{
 		Theme:                   &defaultTheme,
@@ -149,6 +151,7 @@ func GetDefaultConfig() Config {
 		MevkiCellNameSorgu:      &defaultMevkiCellNameSorgu,
 		CinsCellName:            &defaultCinsCellName,
 		TabId:                   &defaultTabId,
+		WordReplaceRules:        &defaultWordReplaceRules,
 	}
 }
 
