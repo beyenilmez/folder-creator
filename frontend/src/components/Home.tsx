@@ -29,6 +29,7 @@ export function Home() {
   const [createFolder, setCreateFolder] = useState<boolean>(false);
   const [wordFileNamePattern, setWordFileNamePattern] = useState<string>("");
   const [fileNamePattern, setFileNamePattern] = useState<string>("");
+  const [wordReplaceRules, setWordReplaceRules] = useState<string>("");
 
   const [running, setRunning] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -38,6 +39,7 @@ export function Home() {
     setCreateFolder(config?.createFolder!);
     setWordFileNamePattern(config?.wordFileNamePattern!);
     setFileNamePattern(config?.fileNamePattern!);
+    setWordReplaceRules(config?.wordReplaceRules!);
   }, [config]);
 
   const handleExcelFileDialog = () => {
@@ -83,7 +85,8 @@ export function Home() {
         createFolder,
         wordFileNamePattern,
         fileNamePattern,
-        filePath
+        filePath,
+        wordReplaceRules
       )
         .then((error) => {
           if (error !== "") {
@@ -285,6 +288,17 @@ export function Home() {
             onChange={(e) => {
               setConfigField("fileNamePattern", e.target.value);
               setFileNamePattern(e.target.value);
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-center gap-2 w-full">
+          <label>Word Değiştirme Kuralı</label>
+          <Input
+            className="w-[90%]"
+            value={wordReplaceRules}
+            onChange={(e) => {
+              setConfigField("wordReplaceRules", e.target.value);
+              setWordReplaceRules(e.target.value);
             }}
           />
         </div>

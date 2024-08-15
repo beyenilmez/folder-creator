@@ -45,6 +45,7 @@ export namespace main {
 	    mevkiCellNameSorgu?: string;
 	    cinsCellName?: string;
 	    tabId?: string;
+	    wordReplaceRules?: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Config(source);
@@ -96,6 +97,7 @@ export namespace main {
 	        this.mevkiCellNameSorgu = source["mevkiCellNameSorgu"];
 	        this.cinsCellName = source["cinsCellName"];
 	        this.tabId = source["tabId"];
+	        this.wordReplaceRules = source["wordReplaceRules"];
 	    }
 	}
 	export class Properties {

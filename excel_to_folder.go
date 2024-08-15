@@ -2,6 +2,7 @@ package main
 
 import (
 	"archive/zip"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -241,7 +242,7 @@ func toTitleCaseWord(text string) string {
 	return strings.Join(words, " ")
 }
 
-func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, createFolderConfig bool, wordFileNamePattern string, fileNamePattern string, filePath string) string {
+func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath string, targetPath string, folderNamePattern string, createFolderConfig bool, wordFileNamePattern string, fileNamePattern string, filePath string, wordReplaceRules string) string {
 	headers, rows, err := ReadExcelRows(excelPath)
 
 	runtime.LogDebug(a.ctx, "Headers: "+strings.Join(headers, ","))
@@ -274,7 +275,7 @@ func (a *App) CreateFolders(excelPath string, wordPath string, copyFolderPath st
 		}
 
 		if wordPath != "" {
-			if err := createWordDocument(wordPath, wordFileNamePattern, headers, rows[i], targetFolderPath); err != nil {
+			if err := createWordDocument(wordPath, wordFileNamePattern, headers, rows[i], targetFolderPath, wordReplaceRules); err != nil {
 				runtime.LogError(a.ctx, "Failed to create word document: "+err.Error())
 			}
 		}
@@ -328,7 +329,7 @@ func (a *App) CreateFoldersV2(excelPath string, copyFolderPath string, targetPat
 	return ""
 }
 
-func createWordDocument(filePath string, wordFileNamePattern string, headers []string, row []string, targetPath string) error {
+func createWordDocument(filePath string, wordFileNamePattern string, headers []string, row []string, targetPath string, wordReplaceRules string) error {
 	r, err := docx.ReadDocxFile(filePath)
 
 	if err != nil {
@@ -345,6 +346,34 @@ func createWordDocument(filePath string, wordFileNamePattern string, headers []s
 		}
 		colCell := sanitizeCellWord(row[i])
 		replacePlaceholdersWord(docx1, header, colCell)
+	}
+
+	// Replace rules
+	splittedRules := strings.Split(wordReplaceRules, ",")
+	for _, rule := range splittedRules {
+		splittedRule := strings.Split(rule, "->")
+
+		if len(splittedRule) != 2 {
+			return errors.New("wordReplaceRules is not valid")
+		}
+
+		if splittedRule[1] == `""` {
+			splittedRule[1] = ""
+		}
+
+		err1 := docx1.Replace(splittedRule[0], splittedRule[1], -1)
+		err2 := docx1.ReplaceFooter(splittedRule[0], splittedRule[1])
+		err3 := docx1.ReplaceHeader(splittedRule[0], splittedRule[1])
+
+		if err1 != nil {
+			return err1
+		}
+		if err2 != nil {
+			return err2
+		}
+		if err3 != nil {
+			return err3
+		}
 	}
 
 	// Strip the file extension
@@ -540,7 +569,7 @@ func copyFolderContentsV2(src, dest string, headers []string, row []string) erro
 		}
 
 		if filepath.Ext(relativePath) == ".docx" {
-			return createWordDocument(path, filepath.Base(path), headers, row, dest)
+			return createWordDocument(path, filepath.Base(path), headers, row, dest, "")
 		} else if filepath.Ext(relativePath) == ".udf" {
 			return createUdfDocument(path, filepath.Base(path), headers, row, dest)
 		}
